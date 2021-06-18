@@ -1,0 +1,50 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.utilitiesMenuContainer {
+  height: 200px;
+  width: 280px;
+}
+
+.headerLogo {
+  height: 120%;
+}
+
+.app-container {
+  width: 100%;
+  height: 93%;
+}
+
+.drawer-container {
+  height: 100%;
+  width: 350px;
+}
+
+.searchBox {
+  width: 600px;
+  padding: 7px 20px 7px 20px;
+  background-color: white;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.searchInput {
+  width: 100%;
+  border: 0px;
+  font-size: 16px;
+}
+
+.searchInput:focus-visible {
+  width: 100%;
+  border: 0px;
+  outline: none;
+  font-size: 16px;
+}
+
+.searchInput:focus {
+  width: 100%;
+  border: 0px;
+  outline: none;
+  font-size: 16px;
+}

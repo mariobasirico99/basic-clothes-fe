@@ -1,0 +1,32 @@
+<!-- nav -->
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/">Home</a>
+      <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav> -->
+
+<mat-toolbar color="primary" *ngIf="user && user.token">
+    <span class="spacer" *ngIf="isUser">Benvenuto utente {{user.username}}</span>
+    <span class="spacer" *ngIf="isAdmin">Benvenuto admin {{user.username}}</span>
+    <button mat-icon-button>
+    <mat-icon>search</mat-icon>
+    </button>
+    <!-- <button mat-button>
+    <mat-icon>account_circle</mat-icon>
+    {{ user.firstName }} {{ user.lastName }}
+  </button> -->
+
+    <button mat-icon-button (click)="logout()" matTooltip="Esci">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<mat-drawer-container [ngClass]="{
+    'h-100': !user || !user.token,
+    'app-container': user && user.token
+  }" [hasBackdrop]="true">
+    <router-outlet></router-outlet>
+</mat-drawer-container>

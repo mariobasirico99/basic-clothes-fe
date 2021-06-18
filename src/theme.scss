@@ -1,0 +1,113 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$bv-brand: (
+  50: #e0eaee,
+  100: #b3cbd5,
+  200: #80a8b9,
+  300: #4d859c,
+  400: #266b87,
+  //Nostro Primary Color
+  500: #005172,
+  600: #004a6a,
+  700: #00405f,
+  800: #003755,
+  900: #002742,
+  A100: #77bbff,
+  A200: #44a1ff,
+  A400: #1188ff,
+  A700: #007bf6,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$bv-red: (
+  50: #f9e0e0,
+  100: #f0b3b3,
+  200: #e68080,
+  300: #db4d4d,
+  400: #d42626,
+  //Il nostro error
+  500: #cc0000,
+  600: #c70000,
+  700: #c00000,
+  800: #b90000,
+  900: #ad0000,
+  A100: #ffd7d7,
+  A200: #ffa4a4,
+  A400: #ff7171,
+  A700: #ff5858,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$bv-yellow: (
+  50: #fff6e8,
+  100: #fee7c6,
+  200: #fdd8a0,
+  300: #fcc879,
+  400: #fcbc5d,
+  //Il nostro Accent
+  500: #fbb040,
+  600: #faa93a,
+  700: #faa032,
+  800: #f9972a,
+  900: #f8871c,
+  A100: #ffffff,
+  A200: #fffcf9,
+  A400: #ffe0c6,
+  A700: #ffd2ad,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+/* ======== Light Theme Custom ======== */
+$primaryLight: mat-palette($bv-brand);
+$accentLight: mat-palette($bv-yellow, 500, 500, A100);
+$warnLight: mat-palette($bv-red);
+
+$lightTheme: mat-light-theme($primaryLight, $accentLight, $warnLight);
+
+@include angular-material-theme($lightTheme);

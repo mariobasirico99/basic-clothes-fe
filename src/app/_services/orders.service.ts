@@ -1,0 +1,185 @@
+import { HttpClient } from '@angular/common/http';
+import { Orders } from '../_models/orders';
+import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
+import { DefaultResponse } from '../_models/defaultResponse';
+import { DefaultFilterResponse } from '../_models/defaultFilterResponse';
+
+@Injectable({
+  providedIn: 'root',
+})
+
+export class OrdersService {
+  constructor(private http: HttpClient) {}
+
+  getAll(index: string, size: string) {
+    return this.http.post<DefaultFilterResponse>(`${environment.apiUrl}/orders/filter?page=${index}&size=${size}`,
+    {}
+    );
+  }
+
+  getAllByPagination(index: string, size: string) {
+    return this.http.post<DefaultFilterResponse>(
+      `${environment.apiUrl}/orders/filter?page=${index}&size=${size}`,
+      {}
+      /* {
+        headers: {
+          'Content-Type': 'application/x-spring-data-compact+json',
+        },
+      } */
+    );
+  }
+
+  sortBy(
+    index: string,
+    size: string,
+    sortDirection : string,
+    sortField : string,
+  ) {
+    return this.http.post<DefaultFilterResponse>(
+      `${environment.apiUrl}/orders/filter?page=${index}&size=${size}&sortDirection=${sortDirection}&sortField=${sortField}`,
+      {}
+    );
+  }
+  getAllByFilterWithPagination(
+    projectId: number | null,
+    managerId: number | null,
+    companieId: number | null,
+    endDateRangeStart: string | null,
+    endDateRangeEnd: string | null,
+    minValue: string | null,
+    maxValue: string | null,
+    index:string,
+    size:string,
+
+  ) {
+    return this.http.post<DefaultFilterResponse>(
+      `${environment.apiUrl}/orders/filter?page=${index}&size=${size}`,
+      {
+        id: projectId,
+        company: {
+          id: companieId,
+        },
+        responsible: {
+          id: managerId,
+        },
+      }
+    );
+  }
+
+  getById(id: number) {
+    return this.http.post<DefaultFilterResponse>(
+      `${environment.apiUrl}/orders/filter`,
+      { id: id },
+      {
+        headers: {
+          'Content-Type': 'application/x-spring-data-compact+json',
+        },
+      }
+    );
+  }
+
+  deleteById(id: number) {
+    return this.http.delete<DefaultResponse>(
+      `${environment.apiUrl}/orders/${id}`
+    );
+  }
+  findByNameLike(name: string) {
+    return this.http.get<DefaultResponse>(
+      `${environment.apiUrl}/orders/search/findByNameLike?name=${name}`
+    );
+  }
+  add(addForm: any) {
+    let responsible = `${environment.apiUrl}/employees/${addForm.manager}`;
+    let company = `${environment.apiUrl}/companies/${addForm.company}`;
+    let ordergroupProgram = `${environment.apiUrl}/ordergroupPrograms/${addForm.ordergroup}`;
+    let endVisibilityDate = '';
+    let endVisibilityDateTemp = addForm.endVisibilityDate
+      .split('/')
+      .reverse()
+      .join('-');
+    endVisibilityDateTemp.split('-').forEach((dateItem: string) => {
+      endVisibilityDate += dateItem.length === 1 ? `0${dateItem}-` : `${dateItem}-`;
+    });
+    endVisibilityDate = endVisibilityDate.slice(0,-1);
+    let startDate = "";
+    let startDateTemp = addForm.startDate.split('/').reverse().join('-');
+    startDateTemp.split('-').forEach((dateItem: string) => {
+      startDate += dateItem.length === 1 ? `0${dateItem}-` : `${dateItem}-`;
+    });
+    startDate = startDate.slice(0,-1);
+    let endDate = "";
+    let endDateTemp = addForm.endDate.split('/').reverse().join('-');
+    endDateTemp.split('-').forEach((dateItem: string) => {
+      endDate += dateItem.length === 1 ? `0${dateItem}-` : `${dateItem}-`;
+    });
+    endDate = endDate.slice(0,-1);
+    let value = addForm.valOrdine;
+    let offertNumber = addForm.numOfferta;
+    let city = addForm.city;
+    let name = addForm.nameOrd;
+    let contactName = addForm.nameRef;
+    let order = {
+      responsible,
+      ordergroupProgram,
+      value,
+      contactName,
+      company,
+      city,
+      name,
+      offertNumber,
+      endVisibilityDate,
+      startDate,
+      endDate,
+    };
+    return this.http.post<any>(`${environment.apiUrl}/orders`, order);
+  }
+
+  update(addForm: any) {
+    let id = addForm.id;
+    let responsible = `${environment.apiUrl}/employees/${addForm.manager}`;
+    let company = `${environment.apiUrl}/companies/${addForm.company}`;
+    let ordergroupProgram = `${environment.apiUrl}/ordergroupPrograms/${addForm.ordergroup}`;
+    let endVisibilityDate = '';
+    let endVisibilityDateTemp = addForm.endVisibilityDate
+      .split('/')
+      .reverse()
+      .join('-');
+    endVisibilityDateTemp.split('-').forEach((dateItem: string) => {
+      endVisibilityDate += dateItem.length === 1 ? `0${dateItem}-` : `${dateItem}-`;
+    });
+    endVisibilityDate = endVisibilityDate.slice(0,-1);
+    let startDate = "";
+    let startDateTemp = addForm.startDate.split('/').reverse().join('-');
+    startDateTemp.split('-').forEach((dateItem: string) => {
+      startDate += dateItem.length === 1 ? `0${dateItem}-` : `${dateItem}-`;
+    });
+    startDate = startDate.slice(0,-1);
+    let endDate = "";
+    let endDateTemp = addForm.endDate.split('/').reverse().join('-');
+    endDateTemp.split('-').forEach((dateItem: string) => {
+      endDate += dateItem.length === 1 ? `0${dateItem}-` : `${dateItem}-`;
+    });
+    endDate = endDate.slice(0,-1);
+    let value = addForm.valOrdine;
+    let orderNumber = addForm.numOfferta;
+    let city = addForm.city;
+    let name = addForm.nameOrd;
+    let contactName = addForm.nameRef;
+    let order = {
+      responsible,
+      ordergroupProgram,
+      value,
+      contactName,
+      company,
+      city,
+      name,
+      orderNumber,
+      endVisibilityDate,
+      startDate,
+      endDate,
+    };
+
+    return this.http.put<any>(`${environment.apiUrl}/orders/${id}`, order);
+  }
+}

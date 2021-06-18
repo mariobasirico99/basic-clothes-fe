@@ -1,0 +1,71 @@
+<!-- Container della pagina -->
+<div class="loginBackground h-100 w-100">
+    <div class="container h-100 w-100">
+        <div class="row h-100 justify-content-center">
+            <!-- Col contenente la card con il form di Login -->
+            <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-7 col-sm-9 col-12 align-self-center">
+                <mat-card>
+                    <div class="row justify-content-center pt-3">
+                        <div class="col-xxl-3 col-xl-4 col-lg-3 col-md-3 col-sm-3 col-3" align="center">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-4 col-xl-5 col-lg-4 col-md-4 col-sm-4 col-4" align="center">
+                            <h1 class="mat-title">Accedi</h1>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-8 col-xl-8 col-lg-9 col-md-8 col-sm-8 col-8" align="center">
+                            <h4 class="mat-subheading-1">Continua sul tool di staffing</h4>
+                        </div>
+                    </div>
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Username</mat-label>
+                                        <input matInput placeholder="n.cognome" formControlName="username" />
+                                        <mat-hint>Usa il prefisso di @elis.org</mat-hint>
+                                        <mat-error *ngIf=" f.username.errors && f.username.errors.required ">Lo username è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Password</mat-label>
+                                        <input matInput [type]="isPasswordHidden ? 'password' : 'text'" placeholder="Password" formControlName="password" />
+                                        <button type="button" mat-icon-button matSuffix (click)="onChange()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordHidden">
+                                        <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
+                                      </button>
+                                        <mat-error *ngIf="f.password && f.password.errors">La password è obbligatoria</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p *ngIf="error" class="error-message">{{ error }}</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-3 pb-5">
+                            <div class="col" align="center">
+                                <button type="submit" [disabled]="loading" mat-raised-button color="primary">
+                                <span *ngIf="!loading"> Accedi </span>
+                                <div class="row my-2" *ngIf="loading">
+                                  <div class="col" align="center">
+                                    <mat-spinner diameter="20" color="accent"></mat-spinner>
+                                  </div>
+                                </div>
+                              </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
