@@ -26,3 +26,17 @@ button:focus {
   margin-bottom: 0px !important;
   font-size: 18px;
 }
+
+.nop {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.nopleft{
+  padding:0px !important;
+}
+
+.logo{
+  width: 180px;
+  height: 100px;
+}
