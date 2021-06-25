@@ -9,9 +9,9 @@
             <mat-form-field class="col-3 nop" appearance="fill">
               <mat-label>Taglia</mat-label>
               <mat-select multiple (selectionChange)="changeTaglia($event.value)">
-                <mat-option value="s">S</mat-option>
-                <mat-option value="m">M</mat-option>
-                <mat-option value="l">L</mat-option>
+                <mat-option value="S">S</mat-option>
+                <mat-option value="M">M</mat-option>
+                <mat-option value="L">L</mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field class="col-3 nop" appearance="fill">
@@ -37,7 +37,7 @@
     </div>
     <div class="card-body">
       <mat-grid-list cols="2" rowHeight="2:1">
-        <mat-grid-tile *ngFor="let article of articles">
+        <mat-grid-tile *ngFor="let article of clothesFiltered">
           <div class="row">
             <p>{{article.nome}}</p>
             <img [src]="article.image" class="img-fluid item">

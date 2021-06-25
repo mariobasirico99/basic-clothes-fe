@@ -40,3 +40,13 @@ button:focus {
   width: 180px;
   height: 100px;
 }
+
+.item {
+  width: 200px;
+  height:200px;
+}
+
+.filter { 
+  display: block;
+  margin: auto;
+}

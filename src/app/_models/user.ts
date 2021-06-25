@@ -4,8 +4,10 @@ import { Role } from './role';
 export class User {
   id: number | undefined;
   username: string | undefined;
-  firstName: string | undefined;
-  lastName: string | undefined;
+  email: string | undefined;
+  city: string | undefined;
+  cap: number | undefined;
+  indirizzo: string| undefined;
   role: Role | undefined;
   token?: string;
 

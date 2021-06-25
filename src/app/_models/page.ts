@@ -1,5 +1,5 @@
 export enum Page {
-  Employees = 'employees',
+  Employees = 'home',
   Orders = 'orders',
   Staffings = 'staffings',
   EmployeesContracts = 'employeesContracts',

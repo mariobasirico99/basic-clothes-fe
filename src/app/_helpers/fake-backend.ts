@@ -11,6 +11,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
 import { Role } from '../_models/role';
 import { FakeData } from './fakeData';
+import { getAllJSDocTags } from 'typescript';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -24,9 +25,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function handleRoute() {
       switch (true) {
-        case url.endsWith('/authenticate') && method === 'POST':
+        case url.endsWith('/article/getall') && method === 'GET':
+            return getAllItems();
+        case url.endsWith('/user/authenticate') && method === 'POST':
           return authenticate();
-        case url.endsWith('/users') && method === 'GET':
+        case url.endsWith('/user/gatall') && method === 'GET':
           return getUsers();
         case url.match(/\/users\/\d+$/) && method === 'GET':
           return getUserById();
@@ -37,6 +40,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     // route functions
+
+    function getAllItems() {
+      console.log(FakeData.articles)
+      return ok(FakeData.articles)
+    }
 
     function authenticate() {
       const { username, password } = body;
