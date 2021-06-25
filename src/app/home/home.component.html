@@ -1,49 +1,50 @@
 <div class="card mt-4">
     <div class="card-header">
-        <div class="example-container">
-            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+        <div class="example-container row">
+            <mat-form-field hintLabel="Max 10 characters" class="col-2 nop" appearance="fill">
               <mat-label>Brand</mat-label>
               <input matInput #input maxlength="10" placeholder="Ralph Lauren">
               <!-- <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint> -->
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field class="col-3 nop" appearance="fill">
               <mat-label>Taglia</mat-label>
-              <mat-select multiple>
-                <mat-option>S</mat-option>
-                <mat-option>M</mat-option>
-                <mat-option>L</mat-option>
+              <mat-select multiple (selectionChange)="changeTaglia($event.value)">
+                <mat-option value="s">S</mat-option>
+                <mat-option value="m">M</mat-option>
+                <mat-option value="l">L</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field class="col-3 nop" appearance="fill">
               <mat-label>Colore</mat-label>
-              <mat-select multiple>
-                <mat-option>Blu</mat-option>
-                <mat-option>Rosso</mat-option>
-                <mat-option>Arancione</mat-option>
+              <mat-select multiple (selectionChange)="changeColore($event.value)">
+                <mat-option value="blu">Blu</mat-option>
+                <mat-option value="rosso">Rosso</mat-option>
+                <mat-option value="arancione">Arancione</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill">
-              <mat-label>Tessuto</mat-label>
-              <mat-select multiple>
-                <mat-option>Cotone</mat-option>
-                <mat-option>Sintetico</mat-option>
-                <mat-option>Lana</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field class="col-2 nop" appearance="fill">
               <mat-label>Prezzo</mat-label>
-              <mat-select multiple>
-                <mat-option>25</mat-option>
-                <mat-option>50</mat-option>
-                <mat-option>75</mat-option>
+              <mat-select multiple (selectionChange)="changePrezzo($event.value)">
+                <mat-option value="25">25</mat-option>
+                <mat-option value="50">50</mat-option>
+                <mat-option value="75">75</mat-option>
               </mat-select>
             </mat-form-field>
+            <div class="filter col-2">
+              <button mat-button (click)="filter()" matTooltip="Filtra">Filtra</button>
+            </div>
           </div>
     </div>
     <div class="card-body">
-        <p>You're logged in with Angular 10 & JWT!!</p>
-        <p>Your role is: <strong>{{user.role}}</strong>.</p>
-        <p>This page can be accessed by <u>all authenticated users</u>.</p>
-        <p class="mb-1">Current user from secure api end point:</p>
+      <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile *ngFor="let article of articles">
+          <div class="row">
+            <p>{{article.nome}}</p>
+            <img [src]="article.image" class="img-fluid item">
+            <p>Prezzo: {{article.prezzo}} €</p>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    
     </div>
 </div>
