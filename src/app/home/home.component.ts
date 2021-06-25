@@ -7,16 +7,18 @@ import { UserService } from 'src/app/_services/user.service';
 import { Article } from '../_models/articles';
 import { ArticleService } from '../_services/article.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
+    tagliah: string[]=[];
     help = {
         marca: null,
-        taglia: null,
+        taglia: this.tagliah,
         colore: null,
         prezzo: null
     };
-    clothesFiltered = {};
+    clothesFiltered: Article[] = [];
     loading = false;
     user: User;
     userFromApi!: User;
@@ -40,31 +42,43 @@ export class HomeComponent {
                 console.log(article)
                 article.image=this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + article.picture);
             })
+            this.clothesFiltered = this.articles;
         });
     }
 
     filter() {
-        this.clothesFiltered = this.articles.filter(article => {
-            if(this.help.colore!=null && article.colore == this.help.colore) {
-                this.clothesFiltered = article;
-            }
-        
-        })
+        this.clothesFiltered = this.articles;
+
+        if(this.help.taglia.length > 0){
+            this.clothesFiltered = this.clothesFiltered.filter(article => this.help.taglia.includes(article.taglia!));
+        }
+
+        if(this.help.marca != null){
+            this.clothesFiltered = this.clothesFiltered.filter(article => article.marca == this.help.marca);
+        }
+
+        if(this.help.colore != null){
+            this.clothesFiltered = this.clothesFiltered.filter(article => article.colore == this.help.colore);
+        }
+
+        if(this.help.prezzo != null){
+            this.clothesFiltered = this.clothesFiltered.filter(article => article.prezzo == this.help.prezzo);
+        }
     }
 
-    changeTaglia(taglia: null) {
-        this.help.taglia = taglia;
-
+    changeTaglia(taglia: string) {
+        this.help.taglia.push(taglia);
+        console.log(this.help.taglia);
     }
 
-    changeMarca(marca) {
+    changeMarca(marca: null) {
         this.help.marca = marca;
     }
 
-    changeColor(color) {
+    changeColor(color: null) {
         this.help.colore = color;
     }
-    changePrezzo(prezzo) {
+    changePrezzo(prezzo: null) {
         this.help.prezzo = prezzo;
     }
 }
