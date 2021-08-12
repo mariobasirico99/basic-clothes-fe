@@ -1,0 +1,14 @@
+.mat-form-field {
+    margin-top: 16px;
+}
+
+.inputData {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputLabel {
+    flex-direction: initial !important;
+}

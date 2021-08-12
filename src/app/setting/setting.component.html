@@ -1,1 +1,121 @@
-<p>setting works!</p>
+<div class="container pt-4 h-100">
+    <app-page-spinner *ngIf="loading"></app-page-spinner>
+    <div *ngIf="!loading" class="row justify-content-center" align="center">
+        <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10 col-sm-12 col-12" style="width: 90%;" align="center">
+            <form [formGroup]="addForm" (ngSubmit)="onSubmit()" *ngIf="addForm">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Informazioni Utente</mat-card-title>
+                        <mat-card-subtitle>Cliccando sul singolo riquadro, puoi modificare le tue informazioni!
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-accordion>
+                            <mat-expansion-panel class="mt-4">
+                                <mat-expansion-panel-header>
+                                    <div class="row w-100">
+                                        <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-5 col-7">
+                                            <mat-panel-title> Username </mat-panel-title>
+                                        </div>
+                                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-7 col-5">
+                                            <mat-panel-description>
+                                                {{ userAccount!.username }}
+                                            </mat-panel-description>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel-header>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <div class="row w-100">
+                                        <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-5 col-7">
+                                            <mat-panel-title> Email </mat-panel-title>
+                                        </div>
+                                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-7 col-5">
+                                            <mat-panel-description>
+                                                {{ userAccount!.email }}
+                                            </mat-panel-description>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel-header>
+                                <mat-form-field>
+                                    <mat-label>Email</mat-label>
+                                    <input matInput formControlName="email" value="{{ userAccount!.email }}" />
+                                </mat-form-field>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <div class="row w-100">
+                                        <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-5 col-7">
+                                            <mat-panel-title> Città </mat-panel-title>
+                                        </div>
+                                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-7 col-5">
+                                            <mat-panel-description>
+                                                {{ userAccount!.city }}
+                                            </mat-panel-description>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel-header>
+
+                                <mat-form-field>
+                                    <mat-label>Città</mat-label>
+                                    <input matInput formControlName="city" value="{{ userAccount!.city }}" />
+                                </mat-form-field>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <div class="row w-100">
+                                        <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-5 col-7">
+                                            <mat-panel-title> Indirizzo </mat-panel-title>
+                                        </div>
+                                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-7 col-5">
+                                            <mat-panel-description>
+                                                {{ userAccount!.indirizzo }}
+                                            </mat-panel-description>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel-header>
+
+                                <mat-form-field>
+                                    <mat-label>Indirizzo</mat-label>
+                                    <input matInput formControlName="indirizzo" value="{{ userAccount!.indirizzo }}" />
+                                </mat-form-field>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <div class="row w-100">
+                                        <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-5 col-6">
+                                            <mat-panel-title> Cap </mat-panel-title>
+                                        </div>
+                                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-7 col-6">
+                                            <mat-panel-description>
+                                                {{ userAccount!.cap }}
+                                            </mat-panel-description>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel-header>
+
+                                <mat-form-field>
+                                    <mat-label>Cap</mat-label>
+                                    <input matInput formControlName="cap" value="{{ userAccount!.cap }}" />
+                                </mat-form-field>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </mat-card-content>
+                </mat-card>
+                <div class="row justify-content-center pt-3 pb-5">
+                    <div class="col" align="center">
+                        <button [disabled]="loading" mat-raised-button color="primary">
+                  <span *ngIf="!loading"> Salva </span>
+                  <div class="row my-2" *ngIf="loading">
+                    <div class="col" align="center">
+                      <mat-spinner diameter="20" color="accent"></mat-spinner>
+                    </div>
+                  </div>
+                </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

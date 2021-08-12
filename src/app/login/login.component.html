@@ -1,5 +1,5 @@
 <!-- Container della pagina -->
-<div class="loginBackground h-100 w-100">
+<div class="loginBackground h-100 w-100" *ngIf="status">
     <div class="container h-100 w-100">
         <div class="row h-100 justify-content-center">
             <!-- Col contenente la card con il form di Login -->
@@ -11,12 +11,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xxl-4 col-xl-5 col-lg-4 col-md-4 col-sm-4 col-4" align="center">
-                            <h1 class="mat-title">Accedi</h1>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-xxl-8 col-xl-8 col-lg-9 col-md-8 col-sm-8 col-8" align="center">
-                            <h4 class="mat-subheading-1">Continua sul tool di staffing</h4>
+                            <h1 class="mat-title">Basic Clothes</h1>
                         </div>
                     </div>
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -26,7 +21,6 @@
                                     <mat-form-field appearance="outline" class="full_width-input">
                                         <mat-label>Username</mat-label>
                                         <input matInput placeholder="n.cognome" formControlName="username" />
-                                        <mat-hint>Usa il prefisso di @elis.org</mat-hint>
                                         <mat-error *ngIf=" f.username.errors && f.username.errors.required ">Lo username è obbligatorio</mat-error>
                                     </mat-form-field>
                                 </p>
@@ -60,6 +54,129 @@
                                     <mat-spinner diameter="20" color="accent"></mat-spinner>
                                   </div>
                                 </div>
+                              </button>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-3 pb-5">
+                            <div class="col" align="center">
+                                <button type="button" [disabled]="loading" mat-raised-button color="primary" (click)="changeStatus()">
+                                <span *ngIf="!loading"> Registrati </span>
+                              </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container della pagina -->
+<div class="loginBackground" *ngIf="!status">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <!-- Col contenente la card con il form di Login -->
+            <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-7 col-sm-9 col-12 align-self-center" style="margin-top: 30px;margin-bottom: 30px;">
+                <mat-card>
+                    <div class="row justify-content-center pt-3">
+                        <div class="col-xxl-3 col-xl-4 col-lg-3 col-md-3 col-sm-3 col-3" align="center">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-4 col-xl-5 col-lg-4 col-md-4 col-sm-4 col-4" align="center">
+                            <h1 class="mat-title">Basic Clothes</h1>
+                        </div>
+                    </div>
+                    <form [formGroup]="regForm" (ngSubmit)="onSubmitReg()">
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput placeholder="Email" formControlName="email" />
+                                        <mat-error *ngIf=" freg.email.errors && freg.email.errors.required ">L'email è obbligatoria</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Username</mat-label>
+                                        <input matInput placeholder="n.cognome" formControlName="username" />
+                                        <mat-error *ngIf=" freg.username.errors && freg.username.errors.required ">Lo username è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Password</mat-label>
+                                        <input matInput [type]="isPasswordHidden ? 'password' : 'text'" placeholder="Password" formControlName="password" />
+                                        <button type="button" mat-icon-button matSuffix (click)="onChange()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordHidden">
+                                        <mat-icon>{{isPasswordHidden ? "visibility_off" : "visibility"}}</mat-icon>
+                                      </button>
+                                        <mat-error *ngIf="freg.password && freg.password.errors">La password è obbligatoria</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Città</mat-label>
+                                        <input matInput placeholder="Città" formControlName="city" />
+                                        <mat-error *ngIf=" freg.city.errors && freg.city.errors.required ">La città è obbligatoria</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Indirizzo</mat-label>
+                                        <input matInput placeholder="Indirizzo" formControlName="indirizzo" />
+                                        <mat-error *ngIf=" freg.indirizzo.errors && freg.indirizzo.errors.required ">L'indirizzo è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Cap</mat-label>
+                                        <input matInput placeholder="Cap" formControlName="cap" />
+                                        <mat-error *ngIf=" freg.cap.errors && freg.cap.errors.required ">Il cap è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p *ngIf="error" class="error-message">{{ error }}</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-3 pb-5">
+                            <div class="col" align="center">
+                                <button type="submit" [disabled]="loading" mat-raised-button color="primary">
+                                <span *ngIf="!loading"> Registrati </span>
+                                <div class="row my-2" *ngIf="loading">
+                                  <div class="col" align="center">
+                                    <mat-spinner diameter="20" color="accent"></mat-spinner>
+                                  </div>
+                                </div>
+                              </button>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-3 pb-5">
+                            <div class="col" align="center">
+                                <button type="button" [disabled]="loading" mat-raised-button color="primary" (click)="changeStatus()">
+                                <span *ngIf="!loading"> Indietro </span>
                               </button>
                             </div>
                         </div>

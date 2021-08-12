@@ -2,6 +2,12 @@ export enum Path {
   Login = 'login',
   Account = 'account',
   Settings = 'settings',
+  Orders = "orders",
   Home = 'dashboard',
   Admin = 'admin',
+  Feedback = 'feedback',
+  Uomo = 'uomo',
+  Donna = 'donna',
+  Bambino = 'bambino',
+  ConfermaAcquisto = 'confirm_purchase'
 }

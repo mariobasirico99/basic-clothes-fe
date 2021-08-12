@@ -9,6 +9,7 @@ import {
   bounceInOnEnterAnimation,
   bounceOutOnLeaveAnimation,
 } from 'angular-animations';
+import { Path } from './_models/path';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,15 @@ export class AppComponent implements OnInit {
     this.authenticationService.user.subscribe((x) => (this.user = x));
   }
   user!: User;
-
+  onSettingsRedirect(): void {
+    this.router.navigateByUrl(Path.Settings);
+  }
+  onFeedbackRedirect(): void {
+    this.router.navigateByUrl(Path.Feedback);
+  }
+  onOrdersRedirect(): void {
+    this.router.navigateByUrl(Path.Orders); 
+  }
   get isAdmin() {
     return this.user && this.user.role === Role.Admin;
   }
@@ -41,7 +50,6 @@ export class AppComponent implements OnInit {
     return this.user && (this.user.role === Role.User);
   }
   ngOnInit() {
-    console.log("USER:",this.user)
   }
 
   logout() {

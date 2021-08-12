@@ -30,6 +30,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BdcWalkModule } from 'bdc-walkthrough';
+import { SettingComponent } from './setting/setting.component';
+import { OrderComponent } from './order/order.component';
+import { PageSpinnerComponent } from './page-spinner/page-spinner.component';
+import { OrderModalComponent } from './order-modal/order-modal.component';
+import { FeedbackModalComponent } from './feedback-modal/feedback-modal.component';
+import { FeedbackPageComponent } from './feedback-page/feedback-page.component';
+import { DialogDataExampleDialogComponent } from './dialog-data-example-dialog/dialog-data-example-dialog.component';
+import { ConfirmPurchaseComponent } from './confirm-purchase/confirm-purchase.component';
+import { MatStepperModule} from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -37,11 +50,24 @@ import { BdcWalkModule } from 'bdc-walkthrough';
     AdminComponent,
     LoginComponent,
     HomeComponent,
+    SettingComponent,
+    OrderComponent,
+    PageSpinnerComponent,
+    OrderModalComponent,
+    FeedbackModalComponent,
+    FeedbackPageComponent,
+    DialogDataExampleDialogComponent,
+    ConfirmPurchaseComponent,
   ],
   imports: [
+    MatStepperModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
     MatTableModule,
     MatPaginatorModule,
     ReactiveFormsModule,
@@ -54,14 +80,14 @@ import { BdcWalkModule } from 'bdc-walkthrough';
     AngularMaterialModule,
     FormsModule,
     BdcWalkModule,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider
+    //fakeBackendProvider
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
 
-/* fakeBackendProvider, */

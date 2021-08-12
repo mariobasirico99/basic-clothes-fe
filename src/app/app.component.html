@@ -10,52 +10,50 @@
 <mat-toolbar color="primary" *ngIf="user && user.token">
     <!--<span class="spacer" *ngIf="isUser">Benvenuto utente {{user.username}}</span>
     <span class="spacer" *ngIf="isAdmin">Benvenuto admin {{user.username}}</span> -->
-    <mat-toolbar-row class="nopleft"> 
-      <div class="col-3 nop">
-        <a href="/">
-          <img src="assets/image/logo.png" class="logo">
-        </a>
-      </div>
-      <div class="col-2 offset-8">
-        <button mat-icon-button>
-          <mat-icon>search</mat-icon>
-        </button>
+    <mat-toolbar-row style="width: 100%;">
+        <a href="/"><img src="assets/image/logo.png" class="logo"></a>
+        <span class="spacer"></span>
+        <button mat-button [matMenuTriggerFor]="settingMenu" color="#ffffff"><mat-icon>account_circle</mat-icon></button>
+        <mat-menu #settingMenu="matMenu" yPosition="below">
+            <button mat-menu-item (click)="onSettingsRedirect()">Mio Account</button>
+            <button mat-menu-item (click)="onOrdersRedirect()">Ordini</button>
+            <button mat-menu-item (click)="onFeedbackRedirect()">Feedback</button>
+        </mat-menu>
         <button mat-icon-button (click)="logout()" matTooltip="Esci">
-          <mat-icon>logout</mat-icon>
-        </button>
-      </div>
-      
+            <mat-icon>logout</mat-icon>
+          </button>
+
     </mat-toolbar-row>
     <mat-toolbar-row>
-      <button mat-button [matMenuTriggerFor]="aboveMenu">Uomo</button>
-      <mat-menu #aboveMenu="matMenu" yPosition="above">
-        <button mat-menu-item>T-shirt</button>
-        <button mat-menu-item>Trousers</button>
-      </mat-menu>
+        <button mat-button [matMenuTriggerFor]="aboveMenu" color="#ffffff">Uomo</button>
+        <mat-menu #aboveMenu="matMenu" yPosition="above">
+            <button mat-menu-item>T-shirt</button>
+            <button mat-menu-item>Trousers</button>
+        </mat-menu>
 
-      <button mat-button [matMenuTriggerFor]="belowMenu">Donna</button>
-      <mat-menu #belowMenu="matMenu" yPosition="below">
-        <button mat-menu-item>T-shirt</button>
-        <button mat-menu-item>Trousers</button>
-      </mat-menu>
+        <button mat-button [matMenuTriggerFor]="belowMenu" color="#ffffff">Donna</button>
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+            <button mat-menu-item>T-shirt</button>
+            <button mat-menu-item>Trousers</button>
+        </mat-menu>
 
-      <button mat-button [matMenuTriggerFor]="beforeMenu">Bambini</button>
-      <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item>T-shirt</button>
-        <button mat-menu-item>Trousers</button>
-      </mat-menu>
+        <button mat-button [matMenuTriggerFor]="beforeMenu" color="#ffffff">Bambini</button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item>T-shirt</button>
+            <button mat-menu-item>Trousers</button>
+        </mat-menu>
     </mat-toolbar-row>
-    
-      
-        
-        <!-- <button mat-button>
+
+
+
+    <!-- <button mat-button>
         <mat-icon>account_circle</mat-icon>
         {{ user.firstName }} {{ user.lastName }}
       </button> -->
-    
-        
-    
-    
+
+
+
+
 </mat-toolbar>
 
 

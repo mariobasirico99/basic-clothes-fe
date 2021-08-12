@@ -27,10 +27,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatSortModule} from '@angular/material/sort';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 const materialModules = [
   OverlayModule,
+  MatCheckboxModule,
+  MatRadioModule,
   MatDialogModule,
   CdkTreeModule,
   MatSortModule,

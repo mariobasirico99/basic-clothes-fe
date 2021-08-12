@@ -11,4 +11,10 @@ export class ArticleService {
   getAll() {
       return this.http.get<Article[]>(`${environment.apiUrl}/article/getall`);
   }
+  notMine(id_utente : any){
+    return this.http.get<Article[]>(`${environment.apiUrl}/article/notMine?id=${id_utente}`);
+  }
+  add(addArticle : any){
+    return this.http.get<Article>(`${environment.apiUrl}/article/add`,addArticle);
+  }
 }

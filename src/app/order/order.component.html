@@ -1,1 +1,63 @@
-<p>order works!</p>
+<div class="row pt-2" style="width: 80%; margin-left: 10%;">
+    <div class="col mat-elevation-z8 px-0" align="center">
+        <table [dataSource]="dataSource" mat-table matSort>
+            <ng-container matColumnDef="Mittente">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="Mittente" style="color: black;">Mittente</th>
+                <td mat-cell *matCellDef="let element">{{ element.mittente.username }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Destinatario">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="Destinatario" style="color: black;">Destinatario</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.destinatario.username }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Articolo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="Articolo" style="color: black;">Articolo</th>
+
+                <td mat-cell *matCellDef="let element">
+                    {{ element.articolo.nome }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Stato">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="Stato" style="color: black;">Stato</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.status }}
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef style="color: black;">Azione</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="onOrderReso(element.id)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Reso</span>
+                        </button>
+
+                        <button mat-menu-item (click)="onOrderFeedBack(element.mittente.id, element.mittente.username)">
+                            <mat-icon>info</mat-icon>
+                            <span>Lascia un feedback</span>
+                        </button>
+                    </mat-menu>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">
+                    Non trovo nessun risultato con questa ricerca
+                </td>
+            </tr>
+        </table>
+        <app-page-spinner *ngIf="loading"></app-page-spinner>
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    </div>
+</div>

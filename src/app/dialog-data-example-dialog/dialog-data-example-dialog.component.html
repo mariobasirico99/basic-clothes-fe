@@ -1,0 +1,17 @@
+<div class="header">
+    <h2 mat-dialog-title>Conferma l'acquisto</h2>
+    <button mat-icon-button [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div mat-dialog-content>
+    <img [src]="data.image" class="img-fluid item">
+    <p>Prezzo: {{data.prezzo}}</p>
+</div>
+
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button [mat-dialog-close]="false">Annulla</button>
+    <button mat-raised-button [mat-dialog-close]="false">Contatta il venditore</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" [routerLink]="['confirm_purchase']">Conferma</button>
+</div>

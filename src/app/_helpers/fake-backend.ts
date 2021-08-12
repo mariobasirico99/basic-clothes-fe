@@ -27,9 +27,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       switch (true) {
         case url.endsWith('/article/getall') && method === 'GET':
             return getAllItems();
+        case url.endsWith('/orders/getall') && method === 'GET':
+          return getAllOrders();
         case url.endsWith('/user/authenticate') && method === 'POST':
           return authenticate();
-        case url.endsWith('/user/gatall') && method === 'GET':
+        case url.endsWith('/user/register') && method === 'POST':
+          return register();
+        case url.match(/\/users\/\d+$/) && method === 'PATCH':
+          return updateUser();
+        case url.endsWith('/users/gatall') && method === 'GET':
           return getUsers();
         case url.match(/\/users\/\d+$/) && method === 'GET':
           return getUserById();
@@ -44,6 +50,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function getAllItems() {
       console.log(FakeData.articles)
       return ok(FakeData.articles)
+    }
+    function getAllOrders() {
+      console.log(FakeData.orders)
+      return ok(FakeData.orders)
     }
 
     function authenticate() {
@@ -70,7 +80,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function getUserById() {
       if (!isLoggedIn()) return unauthorized();
-
       // only admins can access other user records
       if (!isAdmin() && currentUser()!.id !== idFromUrl())
         return unauthorized();
@@ -78,11 +87,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const user = FakeData.users.find((x) => x.id === idFromUrl());
       return ok(user);
     }
-
-    
-
+    function updateUser(){
+      let objIndex = FakeData.users.findIndex((obj => obj.id == parseInt(body.id)));
+      FakeData.users[objIndex].email = body.email;
+      FakeData.users[objIndex].indirizzo = body.indirizzo;
+      FakeData.users[objIndex].cap = body.cap;
+      FakeData.users[objIndex].city = body.city;
+      return ok(FakeData.users);
+    }
     // helper functions
-
+    function register(){
+      body.id = FakeData.users[FakeData.users.length - 1].id + 1;
+      let tempUser = FakeData.users.slice();
+      console.log(tempUser)
+      tempUser.push(body);
+      FakeData.users = tempUser;
+      return ok(FakeData.users);
+    }
     function ok(body: any) {
       return of(new HttpResponse({ status: 200, body })).pipe(delay(500)); // delay observable to simulate server api call
     }
@@ -117,7 +138,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function isAdmin() {
       console.log("isAdmin: ",isLoggedIn() && currentUser()!.role === Role.Admin)
       return isLoggedIn() && currentUser()!.role === Role.Admin;
-    }
+    } 
 
 
     function currentUser() {

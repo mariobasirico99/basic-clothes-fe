@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { UserService } from '../_services/user.service';
 
 
 @Component({
@@ -13,8 +14,10 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 })
 export class LoginComponent implements OnInit {
   loginForm: any;
+  regForm:any;
   loading = false;
   submitted = false;
+  status=true;
   error = '';
   isPasswordHidden = true;
 
@@ -23,6 +26,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
+    private userService: UserService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.userValue) {
@@ -33,10 +37,18 @@ export class LoginComponent implements OnInit {
     this.isPasswordHidden = !this.isPasswordHidden;
   }
   ngOnInit() {
-    console.log("sono in login")
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+    });
+    this.regForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      cap: ['',Validators.required],
+      indirizzo: ['',Validators.required],
+      city: ['',Validators.required],
+      email: ['',Validators.required],
+      initialRole: ['']
     });
   }
 
@@ -44,7 +56,12 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.loginForm!.controls;
   }
-
+  get freg() {
+    return this.regForm!.controls;
+  }
+  changeStatus(){
+    this.status = !this.status;
+  }
   onSubmit() {
     this.submitted = true;
 
@@ -67,5 +84,29 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         },
       });
+  }
+  onSubmitReg() {
+
+    // stop here if form is invalid
+    if (this.regForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.userService.register(this.regForm.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.status = true;
+          this.loading = false;
+        },
+        error: (error) => {
+          this.error = error;
+          this.loading = false;
+        },
+      });
+    this.userService.getAll().pipe(first()).subscribe((users) => {
+      console.log(users);
+    });
   }
 }
