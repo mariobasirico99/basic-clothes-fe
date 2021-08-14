@@ -5,7 +5,7 @@
     </button>
 </div>
 
-<div mat-dialog-content>
+<div mat-dialog-content align="center">
     <img [src]="data.image" class="img-fluid item">
     <p>Prezzo: {{data.prezzo}}</p>
 </div>
@@ -13,5 +13,5 @@
 <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button [mat-dialog-close]="false">Annulla</button>
     <button mat-raised-button [mat-dialog-close]="false">Contatta il venditore</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" [routerLink]="['confirm_purchase']">Conferma</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" [routerLink]="['confirm_purchase',this.data.id]">Conferma</button>
 </div>

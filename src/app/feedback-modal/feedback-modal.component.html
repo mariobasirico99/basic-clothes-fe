@@ -1,16 +1,52 @@
 <div class="container" id="modal-content-wrapper">
     <div class="row justify-content-center">
         <div class="col">
-            <h1 id="modal-title" align="center">Reso Ordine</h1>
+            <h1 id="modal-title" align="center">Lascia un Feedback al Mittente</h1>
         </div>
 
     </div>
     <div class="row justify-content-center">
         <div id="modal-body">
-            <p>Sei sicuro di voler effetuare il reso?</p>
-            <button mat-raised-button color="primary">
-                <span> Effettua Reso </span>
-              </button>
+            <form [formGroup]="form">
+                <div class="row justify-content-center pt-1">
+                    <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                        <p>
+                            <mat-form-field appearance="outline" class="full_width-input">
+                                <mat-label>Username</mat-label>
+                                <input matInput placeholder="n.cognome" formControlName="username" [readonly]="true" />
+                                <mat-error *ngIf=" f.username.errors && f.username.errors.required ">Lo username è obbligatorio</mat-error>
+                            </mat-form-field>
+                        </p>
+                    </div>
+                </div>
+                <div class="row justify-content-center pt-1">
+                    <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                        <p>
+                            <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Feedback</mat-label>
+                                <input matInput placeholder="Descrizione" formControlName="descrizione" />
+                            </mat-form-field>
+                        </p>
+                    </div>
+                </div>
+                <div class="row justify-content-center pt-1">
+                    <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                        <p>
+                            <mat-form-field class="col" apparance="outline">
+                                <mat-label>Voto:</mat-label>
+                                <input matInput placeholder="max 5" type="number" formControlName="voto">
+                            </mat-form-field>
+                        </p>
+                    </div>
+                </div>
+                <div class="row justify-content-center pt-3 pb-5">
+                    <div class="col" align="center">
+                        <button type="button" mat-raised-button color="primary" (click)="sendFeedback()">
+                        <span *ngIf="!loading"> Manda </span>
+                      </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

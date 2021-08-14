@@ -63,7 +63,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
 },
 {
-    path: Path.ConfermaAcquisto,
+    path: Path.ConfermaAcquisto+"/:id",
     component: ConfirmPurchaseComponent
 },
   {

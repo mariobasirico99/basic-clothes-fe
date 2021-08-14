@@ -29,8 +29,13 @@ export class OrdersService {
   }
 
   getById(id: number) {
-    return this.http.get<Orders>(
-      `${environment.apiUrl}/order/getById?id=${id}`);
+    console.log(id)
+    return this.http.get<Orders[]>(`${environment.apiUrl}/order/getById?id=${id}`);
+  }
+
+  getByIdDest(id: number) {
+    console.log(id)
+    return this.http.get<Orders[]>(`${environment.apiUrl}/order/getByIdDest?id=${id}`);
   }
   reso(order : Orders){
     console.log(order)

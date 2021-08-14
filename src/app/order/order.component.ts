@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs/operators';
 import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import { OrderModalComponent } from '../order-modal/order-modal.component';
+import { Role } from '../_models/role';
 import { OrdersService } from '../_services/orders.service';
 
 @Component({
@@ -23,13 +24,15 @@ export class OrderComponent implements OnInit {
   ];
   dataSource: any;
   loading = false;
-  
+  user:any;
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   constructor(
     private orderService : OrdersService,
     public matDialog: MatDialog
-  ) { }
+  ) { 
+    this.user = JSON.parse(localStorage.getItem('user')!);
+  }
 
   ngOnInit(): void {
     this.onOrdersLoading();
@@ -38,14 +41,25 @@ export class OrderComponent implements OnInit {
   onOrdersLoading() {
     this.loading = true;
     this.dataSource = null;
-
-    this.orderService
+    console.log(this.isAdmin)
+    if(this.isAdmin){
+      this.orderService
       .getAll()
       .pipe(first())
       .subscribe((response) => {
         this.dataSource = new MatTableDataSource(response);
         this.loading = false;
       });
+    }
+    else{
+      this.orderService
+      .getByIdDest(this.user.userId)
+      .pipe(first())
+      .subscribe((response) => {
+        this.dataSource = new MatTableDataSource(response);
+        this.loading = false;
+      });
+    }
   }
 
   onOrderReso(id: number){
@@ -63,7 +77,7 @@ export class OrderComponent implements OnInit {
   onOrderFeedBack(id: number,username: string){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.id = 'modal-component';
-    dialogConfig.height = '300px';
+    dialogConfig.height = '500px';
     dialogConfig.width = '400px';
     dialogConfig.data = { mittente: id, username: username};
     const dialogRef = this.matDialog.open(FeedbackModalComponent,dialogConfig);
@@ -72,5 +86,17 @@ export class OrderComponent implements OnInit {
       this.onOrdersLoading();
     }); 
        
+  }
+  get isUser() {
+    return (
+      this.user &&
+      (this.user.roles[0].role === Role.User)
+    );
+  }
+  get isAdmin() {
+    return (
+      this.user &&
+      (this.user.roles[0].role === Role.Admin)
+    );
   }
 }

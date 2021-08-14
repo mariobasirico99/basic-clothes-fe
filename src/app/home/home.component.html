@@ -48,8 +48,8 @@
         </div>
         <div class="content">
             <mat-spinner *ngIf="clothes == null"></mat-spinner>
-            <div fxLayout="row wrap" fxLayoutGap="16px grid">
-                <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let article of getFilteredClothes()">
+            <div class="row">
+                <div class="col-md-3 mx-auto my-5" *ngFor="let article of getFilteredClothes()">
                     <mat-card class="mat-elevation-z4" (click)="openDialog(article)">
                         <mat-card-header>
                             <mat-card-title>

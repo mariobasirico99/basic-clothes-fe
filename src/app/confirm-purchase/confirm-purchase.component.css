@@ -9,6 +9,11 @@
     flex-direction: column;
 }
 
+.inputData2 {
+    justify-content: center;
+    align-items: center;
+}
+
 .inputLabel {
     flex-direction: initial !important;
 }

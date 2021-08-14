@@ -1,34 +1,33 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <mat-horizontal-stepper #stepper>
-                <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-                    <form [formGroup]="firstFormGroup" class="form">
-                        <ng-template matStepLabel>Fill out your information</ng-template>
+            <mat-horizontal-stepper linear #stepper>
+                <mat-step [stepControl]="firstFormGroup" errorMessage="Informazioni Obbligatorie">
+                    <ng-template matStepLabel>Informazioni</ng-template>
+                    <div class="row" style="margin-top:10px;">
+                        <mat-radio-group class="inputData">
+                            <mat-radio-button value="saved" (click)="changeInfoSaved()">Usa le Informazioni salvate</mat-radio-button>
+                            <mat-radio-button value="insert" (click)="changeInfoInsert()">Inserisci nuove Informazioni</mat-radio-button>
+                        </mat-radio-group>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                    <form [formGroup]="firstFormGroup" class="form" *ngIf="info">
                         <div class="inputData">
-                            <mat-form-field style="width:50%" appearance="fill">
-                                <mat-label>Last name</mat-label>
-                                <input matInput placeholder="Last name" formControlName="firstCtrl" required>
+                            <mat-form-field style="width:50%" appearance="outline">
+                                <mat-label>Nome</mat-label>
+                                <input matInput placeholder="Nome" formControlName="nome">
                             </mat-form-field>
-                            <mat-form-field style="width:50%" appearance="fill">
-                                <mat-label>First name</mat-label>
-                                <input matInput placeholder="First name" formControlName="firstCtrl" required>
+                            <mat-form-field style="width:50%" appearance="outline">
+                                <mat-label>Indirizzo</mat-label>
+                                <input matInput placeholder="Indirizzo" formControlName="indirizzo">
                             </mat-form-field>
-                            <mat-form-field style="width:50%" appearance="fill">
-                                <mat-label>Address</mat-label>
-                                <input matInput placeholder="Address" formControlName="firstCtrl" required>
+                            <mat-form-field style="width:50%" appearance="outline">
+                                <mat-label>Città</mat-label>
+                                <input matInput placeholder="Città" formControlName="city">
                             </mat-form-field>
-                            <mat-form-field style="width:50%" appearance="fill">
-                                <mat-label>City</mat-label>
-                                <input matInput placeholder="City" formControlName="firstCtrl" required>
-                            </mat-form-field>
-                            <mat-form-field style="width:50%" appearance="fill">
+                            <mat-form-field style="width:50%" appearance="outline">
                                 <mat-label>CAP</mat-label>
-                                <input matInput placeholder="CAP" formControlName="firstCtrl" required>
-                            </mat-form-field>
-                            <mat-form-field style="width:50%" appearance="fill">
-                                <mat-label>Nation</mat-label>
-                                <input matInput placeholder="Nation" formControlName="firstCtrl" required>
+                                <input matInput *ngIf="info" placeholder="CAP" formControlName="cap">
                             </mat-form-field>
                             <button mat-button matStepperNext>Next</button>
                         </div>
@@ -36,14 +35,14 @@
                 </mat-step>
                 <mat-step [stepControl]="secondFormGroup" errorMessage="Payout is required.">
                     <form [formGroup]="secondFormGroup">
-                        <ng-template matStepLabel>Fill out your payment</ng-template>
+                        <ng-template matStepLabel>Pagamento</ng-template>
                         <div class="inputData">
                             <h2>Seleziona il metodo di pagamento</h2>
                             <div class="row">
                                 <mat-radio-group class="inputData" [formGroup]="secondFormGroup">
-                                    <mat-radio-button class="example-margin" value="carta">Carta di credito/debito</mat-radio-button>
+                                    <mat-radio-button class="example-margin" value="carta" [disabled]="true">Carta di credito/debito</mat-radio-button>
                                     <mat-radio-button class="example-margin" value="contanti">Contanti</mat-radio-button>
-                                    <mat-radio-button class="example-margin" value="paypal">PayPal</mat-radio-button>
+                                    <mat-radio-button class="example-margin" value="paypal" [disabled]="true">PayPal</mat-radio-button>
                                 </mat-radio-group>
                             </div>
                             <div style="flex-direction: row">
