@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, OnChanges {
     userFromApi!: User;
 
     clothes: Article[] | undefined = undefined;
-
+    done=false;
     private type: string | null = null;
     private sex: string | null = null;
     public sizes: String[] = [];
@@ -81,15 +81,20 @@ export class HomeComponent implements OnInit, OnChanges {
 
         this.articleService.notMine(this.user.userId).pipe(first()).subscribe((art) => {
             this.loading = false;
+            this.done = false;
             console.log(art)
             this.clothes = art.filter(article =>
                 article.venduto === false
                 && article.prezzo != null
             ).map(article => {
-                article.image = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + article.picture)
+                article.image = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/JPEG;base64,' + article.picture)
+                
                 return article;
             })
+            
         });
+        
+        
     }
 
     ngOnChanges() {

@@ -23,7 +23,6 @@ import { FormsModule } from '@angular/forms';
 
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/fake-backend';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,6 +42,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
+import { AddClothesComponent } from './add-clothes/add-clothes.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +58,7 @@ import { MatRippleModule } from '@angular/material/core';
     FeedbackPageComponent,
     DialogDataExampleDialogComponent,
     ConfirmPurchaseComponent,
+    AddClothesComponent,
   ],
   imports: [
     MatStepperModule,

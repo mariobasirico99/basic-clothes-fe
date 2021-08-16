@@ -52,6 +52,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
   }
 
+  add(){
+    this.router.navigateByUrl("/addClothes");
+  }
+
   logout() {
     this.authenticationService.logout();
   }

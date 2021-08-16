@@ -6,6 +6,7 @@ export enum Path {
   Home = 'dashboard',
   Admin = 'admin',
   Feedback = 'feedback',
+  AddClothes = "addClothes",
   Uomo = 'uomo',
   Donna = 'donna',
   Bambino = 'bambino',

@@ -15,6 +15,16 @@ export class ArticleService {
     return this.http.get<Article[]>(`${environment.apiUrl}/article/notMine?id=${id_utente}`);
   }
   add(addArticle : any){
-    return this.http.get<Article>(`${environment.apiUrl}/article/add`,addArticle);
+    return this.http.post<Article>(`${environment.apiUrl}/article/add`,addArticle);
+  }
+  getUserbyId(id_utente : any){
+    return this.http.get<any>(`${environment.apiUrl}/article/getUserIdById?id=${id_utente}`);
+  }
+  upload(form:any,id:number){
+    console.log(form)
+    return this.http.post<any>(`${environment.apiUrl}/article/upload?id=${id}`,form);
+  }
+  getImage(id:number){
+    return this.http.get<any>(`${environment.apiUrl}/article/getimage?id=${id}`);
   }
 }

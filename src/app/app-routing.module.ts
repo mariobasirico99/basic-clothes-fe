@@ -11,6 +11,7 @@ import { SettingComponent } from './setting/setting.component';
 import { OrderComponent } from './order/order.component';
 import { FeedbackPageComponent } from './feedback-page/feedback-page.component';
 import { ConfirmPurchaseComponent } from './confirm-purchase/confirm-purchase.component';
+import { AddClothesComponent } from './add-clothes/add-clothes.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: Path.AddClothes,
+    component: AddClothesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: Path.Uomo,
     children: [
         {path : '**' , component: HomeComponent}
@@ -63,8 +69,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
 },
 {
-    path: Path.ConfermaAcquisto+"/:id",
-    component: ConfirmPurchaseComponent
+    path: Path.ConfermaAcquisto + "/:id",
+    component: ConfirmPurchaseComponent,
+    canActivate: [AuthGuard],
 },
   {
     path: Path.Orders,

@@ -1,0 +1,135 @@
+<div class="loginBackground">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <!-- Col contenente la card con il form di Login -->
+            <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-7 col-sm-9 col-12 align-self-center" style="margin-top: 30px;margin-bottom: 30px;">
+                <mat-card>
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-4 col-xl-5 col-lg-4 col-md-4 col-sm-4 col-4" align="center">
+                            <h1 class="mat-title">Aggiungi Vestito</h1>
+                        </div>
+                    </div>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Nome</mat-label>
+                                        <input matInput placeholder="Nome" formControlName="nome" />
+                                        <mat-error *ngIf=" f.nome.errors && f.nome.errors.required ">Il nome è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Sesso</mat-label>
+                                        <input matInput placeholder="Sesso" formControlName="sesso" />
+                                        <mat-error *ngIf=" f.sesso.errors && f.sesso.errors.required ">Il sesso è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Marca</mat-label>
+                                        <input matInput placeholder="Marca" formControlName="marca" />
+                                        <mat-error *ngIf=" f.marca.errors && f.marca.errors.required ">La marca è obbligatoria</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Tipo</mat-label>
+                                        <input matInput placeholder="T-shirt..." formControlName="tipo" />
+                                        <mat-error *ngIf=" f.tipo.errors && f.tipo.errors.required ">Il tipo è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Colore</mat-label>
+                                        <mat-select [(value)]="col" formControlName="colore" id="colore" [placeholder]="col">
+                                            <mat-option *ngFor="let colore of colori" [value]="colore.colore">{{ colore.colore }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf=" f.colore.errors && f.colore.errors.required ">Il colore è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field appearance="outline" class="full_width-input">
+                                        <mat-label>Taglia</mat-label>
+                                        <mat-select [(value)]="tagl" formControlName="taglia" id="colore" [placeholder]="tagl">
+                                            <mat-option *ngFor="let taglia of taglie" [value]="taglia.taglia">{{ taglia.taglia }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf=" f.taglia.errors && f.taglia.errors.required ">La taglia è obbligatorio</mat-error>
+                                    </mat-form-field>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p>
+                                    <mat-form-field class="col" apparance="outline">
+                                        <mat-label>Prezzo</mat-label>
+                                        <input matInput placeholder="Prezzo" type="number" formControlName="prezzo">
+                                    </mat-form-field>
+                                    <mat-error *ngIf=" f.prezzo.errors && f.prezzo.errors.required ">Il prezzo è obbligatorio</mat-error>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center pt-1">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center" style="justify-content: center;">
+                                <div class="col" align="center">
+                                    <label for="file">File</label>
+                                    <input type="file" id="file" (change)="onFileChanged($event)">
+                                    <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.file.errors.required">Image file is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
+                                <p *ngIf="error" class="error-message">{{ error }}</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-3 pb-5">
+                            <div class="col" align="center">
+                                <button type="submit" [disabled]="loading" mat-raised-button color="primary">
+                                <span *ngIf="!loading"> Salva </span>
+                                <div class="row my-2" *ngIf="loading">
+                                  <div class="col" align="center">
+                                    <mat-spinner diameter="20" color="accent"></mat-spinner>
+                                  </div>
+                                </div>
+                              </button>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center pt-3 pb-5">
+                            <div class="col" align="center">
+                                <button type="button" [disabled]="loading" mat-raised-button color="primary" (click)="goBack()">
+                                <span *ngIf="!loading"> Indietro </span>
+                              </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
