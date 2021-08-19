@@ -50,6 +50,14 @@
                             <mat-icon>info</mat-icon>
                             <span>Lascia un feedback</span>
                         </button>
+                        <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'Confermato')">
+                            <mat-icon>info</mat-icon>
+                            <span>Conferma</span>
+                        </button>
+                        <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'Consegnato')">
+                            <mat-icon>info</mat-icon>
+                            <span>Consegnato</span>
+                        </button>
                     </mat-menu>
                 </td>
             </ng-container>

@@ -12,91 +12,126 @@ import {FormControl} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogDataExampleDialogComponent} from '../dialog-data-example-dialog/dialog-data-example-dialog.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import { TaglieService } from '../_services/taglie.service';
+import { ColorsService } from '../_services/colors.service';
+import { TipiService } from '../_services/tipi.service';
+import { MarcheService } from '../_services/marche.service';
+import { Path } from '../_models/path';
 
 @Component({templateUrl: 'home.component.html'})
 export class HomeComponent implements OnInit, OnChanges {
     loading = false;
-    user: any;
+    public user: any;
     userFromApi!: User;
-
+    taglie : any;
+    tipi:any
+    marche:any;
+    colori:any;
     clothes: Article[] | undefined = undefined;
     done=false;
-    private type: string | null = null;
+    public type: string | null = null;
     private sex: string | null = null;
     public sizes: String[] = [];
     public colors: String[] = [];
+    public brands: String[] = [];
     public min = "";
     public max = "";
     public order = "";
     public brand = "";
-
+    public tipo :any;
+    sesso: any;
     myControl = new FormControl();
-    options: string[] = ['Polo Ralph Lauren', 'Lacoste', 'Nike', 'Adidas', 'H&M', 'Zara'];
-    filteredOptions: Observable<string[]> | undefined;
+    myControlTipo = new FormControl();
+    filteredBrand: Observable<string[]> | undefined;
+    filteredTipo: Observable<string[]> | undefined;
 
     constructor(
-        private _sanitizer: DomSanitizer,
+        public _sanitizer: DomSanitizer,
         private userService: UserService,
         private authenticationService: AuthenticationService,
         private articleService: ArticleService,
         private route: ActivatedRoute,
+        private tipoService : TipiService,
+        private marcheService : MarcheService,
+        private taglieService : TaglieService,
+        private colorService : ColorsService,
         private router: Router,
         public dialog: MatDialog
     ) {
         this.user = JSON.parse(localStorage.getItem('user')!);
-        console.log(this.user)
+        this.userService.getById(this.user.userId).pipe(first()).subscribe((res)=>{
+            console.log(res)
+            this.user = res
+        })
     }
 
     ngOnInit() {
-        this.filteredOptions = this.myControl.valueChanges.pipe(
-            startWith(''),
-            map(value => this._filter(value))
-        );
-
-        let path = this.router.url.split('#')[0].split('?')[0];
-
-        if (path[0] == "/")
-            path = path.slice(1);
-
-        if (path.length > 0) {
-            switch (path.split("/")[0].toLowerCase()) {
-                case "uomo":
-                    this.sex = "M";
-                    break;
-                case "donna":
-                    this.sex = "F";
-                    break;
-                case "bambino":
-                    this.sex = "B";
-                    break;
+        this.taglie = this.taglieService.getall().taglie;
+        this.colori = this.colorService.getall().colori;
+        this.marche = this.marcheService.getall().marche;
+        this.tipi = this.tipoService.getall().tipi;
+        
+        this.reload(this.user.sesso)
+    }
+    add(){
+        this.router.navigateByUrl("/addClothes");
+    }
+    reload(sesso:any){
+        console.log(sesso)
+        if(sesso != null && sesso!=undefined){
+            if(this.user.userId !=undefined){
+                this.articleService.notMineAndSex(this.user.userId,sesso).pipe(first()).subscribe((art) => {
+                    this.loading = true;
+                    this.done = false;
+                    this.clothes = art.filter(article =>
+                        article.venduto === false
+                        && article.prezzo != null
+                    )
+                    this.loading = false
+                    this.router.navigateByUrl(Path.Home);
+                });
             }
-            if (this.sex != null
-                && path.split("/").length > 1
-                && path.split("/")[1].length > 0) {
-                this.type = path.split("/")[1].toLowerCase();
+            else{
+                this.articleService.notMineAndSex(this.user.id,sesso).pipe(first()).subscribe((art) => {
+                    this.loading = true;
+                    this.done = false;
+                    this.clothes = art.filter(article =>
+                        article.venduto === false
+                        && article.prezzo != null
+                    )
+                    this.loading = false
+                    this.router.navigateByUrl(Path.Home);
+                });
+            }
+        }
+        else{
+            if(this.user.userId != undefined){
+                this.articleService.notMine(this.user.userId).pipe(first()).subscribe((art) => {
+                    this.loading = true;
+                    this.done = false;
+                    this.clothes = art.filter(article =>
+                        article.venduto === false
+                        && article.prezzo != null
+                    )
+                    this.loading = false
+                    this.router.navigateByUrl(Path.Home);
+                });
+            }
+            else{
+                this.articleService.notMine(this.user.id).pipe(first()).subscribe((art) => {
+                    this.loading = true;
+                    this.done = false;
+                    this.clothes = art.filter(article =>
+                        article.venduto === false
+                        && article.prezzo != null
+                    )
+                    this.loading = false
+                    this.router.navigateByUrl(Path.Home);
+                });
             }
         }
 
-
-
-        this.articleService.notMine(this.user.userId).pipe(first()).subscribe((art) => {
-            this.loading = false;
-            this.done = false;
-            console.log(art)
-            this.clothes = art.filter(article =>
-                article.venduto === false
-                && article.prezzo != null
-            ).map(article => {
-                article.image = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/JPEG;base64,' + article.picture)
-                
-                return article;
-            })
-            
-        });
-        
-        
     }
-
     ngOnChanges() {
         this.getFilteredClothes();
     }
@@ -104,12 +139,14 @@ export class HomeComponent implements OnInit, OnChanges {
     openDialog(value: Article) {
         this.dialog.open(DialogDataExampleDialogComponent, {
             data: value,
-        }).afterClosed().subscribe(() => {console.log("ciao");this.getFilteredClothes()});
+        }).afterClosed().subscribe(() => {this.getFilteredClothes()});
     }
-
 
     setBrandWithEvent(event: any) {
         this.brand = (event.target as HTMLInputElement).value;
+    }
+    setTipoWithEvent(event: any) {
+        this.tipo = (event.target as HTMLInputElement).value;
     }
 
     setMinWithEvent(event: any) {
@@ -124,8 +161,14 @@ export class HomeComponent implements OnInit, OnChanges {
         return this.sex == null || a.sesso == this.sex;
     }
 
-    filterType(a: Article) {
-        return this.type == null || a.tipo == this.type;
+    filterType(article: Article): boolean {
+        if (this.type == null || this.type.length == 0) {
+            return true;
+        } else if (this.type.length == 1) {
+            return article.tipo == this.type[0];
+        } else {
+            return article.tipo != null && this.type.indexOf(article.tipo) != -1;
+        }
     }
 
     filterSizes(article: Article): boolean {
@@ -149,10 +192,12 @@ export class HomeComponent implements OnInit, OnChanges {
     }
 
     filterBrand(article: Article): boolean {
-        if (this.brand == null || this.brand.length == 0) {
+        if (this.brands == null || this.brands.length == 0) {
             return true;
+        } else if (this.brands.length == 1) {
+            return article.marca == this.brands[0];
         } else {
-            return article.marca == this.brand;
+            return article.marca != null && this.brands.indexOf(article.marca) != -1;
         }
     }
 
@@ -194,6 +239,7 @@ export class HomeComponent implements OnInit, OnChanges {
                 .filter(a => this.filterColor(a))
                 .filter(a => this.filterMin(a))
                 .filter(a => this.filterMax(a))
+                
         );
     }
 
@@ -214,6 +260,6 @@ export class HomeComponent implements OnInit, OnChanges {
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
 
-        return this.options.filter(option => option.toLowerCase().includes(filterValue));
+        return this.marche.filter((marche: string) => marche.toLowerCase().includes(filterValue));
     }
 }

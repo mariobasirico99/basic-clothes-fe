@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ArticleService } from '../_services/article.service';
 import { ColorsService } from '../_services/colors.service';
+import { MarcheService } from '../_services/marche.service';
+import { SessoService } from '../_services/sesso.service';
 import { TaglieService } from '../_services/taglie.service';
+import { TipiService } from '../_services/tipi.service';
 
 @Component({
   selector: 'app-add-clothes',
@@ -18,6 +21,12 @@ export class AddClothesComponent implements OnInit {
   col:any;
   taglie : any;
   tagl:any;
+  marche:any;
+  mar:any;
+  sessi : any;
+  sex:any;
+  tipi : any;
+  tip:any;
   submitted = false;
   selectedFile: any;
   retrievedImage: any;
@@ -32,6 +41,9 @@ export class AddClothesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private taglieService : TaglieService,
     private coloriService : ColorsService,
+    private marcheService : MarcheService,
+    private tipiService : TipiService,
+    private sexService : SessoService,
     private articleService : ArticleService,
     private router : Router
     ) {
@@ -41,6 +53,9 @@ export class AddClothesComponent implements OnInit {
   ngOnInit(): void {
     this.colori = this.coloriService.getall().colori;
     this.taglie = this.taglieService.getall().taglie;
+    this.sessi = this.sexService.getall().all;
+    this.tipi = this.tipiService.getall().tipi;
+    this.marche = this.marcheService.getall().marche;
     this.form = this.formBuilder.group({
       nome: ['', Validators.required],
       colore: ['', Validators.required],
@@ -62,14 +77,22 @@ export class AddClothesComponent implements OnInit {
   }
   
   onSubmit() {
+    this.loading = true
     console.log(this.selectedFile)
     this.articleService.add(this.form.value).pipe(first()).subscribe((res)=>{
       console.log(res)
       const uploadImageData = new FormData();
       uploadImageData.append('imageValue', this.selectedFile);
 
-      this.articleService.upload(uploadImageData,res.id!).pipe(first()).subscribe((res)=>{
-        this.router.navigateByUrl("/");
+      this.articleService.upload(uploadImageData,res.id!).pipe(first()).subscribe({
+        next: () => {
+          this.router.navigateByUrl("/");
+          this.loading = false;
+        },
+        error: (error) => {
+          this.router.navigateByUrl("/");
+          this.loading = false;
+        },
       })
     })
     

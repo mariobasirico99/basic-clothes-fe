@@ -10,37 +10,37 @@ export class ColorsService {
     return {
         colori: [
           {
-            colore: 'Nero',
+            colore: 'NERO',
           },
           {
-            colore: 'Bianco',
+            colore: 'BIANCO',
           },
           {
-            colore: 'Arancione',
+            colore: 'ARANCIONE',
           },
           {
-            colore: 'Giallo',
+            colore: 'GIALLO',
           },
           {
-            colore: 'Verde',
+            colore: 'VERDE',
           },
           {
-            colore: 'Rosso',
+            colore: 'ROSSO',
           },
           {
-            colore: 'Viola',
+            colore: 'VIOLA',
           },
           {
-            colore: 'Marrone',
+            colore: 'MARRONE',
           },
           {
-            colore: 'Blu',
+            colore: 'BLU',
           },
           {
-            colore: 'Azzurro',
+            colore: 'AZZURRO',
           },
           {
-            colore: 'Rosa',
+            colore: 'ROSA',
           },
         ],
     };

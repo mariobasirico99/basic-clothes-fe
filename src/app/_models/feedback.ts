@@ -5,4 +5,5 @@ export class Feedback {
     descrizione: string | undefined;
     voto: number | undefined;
     user: User | undefined;
+    scrittore: User | undefined;
   }

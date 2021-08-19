@@ -1,17 +1,22 @@
-<div class="header">
-    <h2 mat-dialog-title>Conferma l'acquisto</h2>
-    <button mat-icon-button [mat-dialog-close]="false">
-        <mat-icon>close</mat-icon>
-    </button>
-</div>
+<div *ngIf="done">
+    <div class="header">
+        <h2 mat-dialog-title (click)="infoMitt()">{{user.username}}</h2>
+        <button mat-icon-button [mat-dialog-close]="false">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
 
-<div mat-dialog-content align="center">
-    <img [src]="data.image" class="img-fluid item">
-    <p>Prezzo: {{data.prezzo}}</p>
-</div>
+    <div mat-dialog-content align="center">
+        <img [src]="_sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+data.picture)" class="img-fluid item" style="margin-bottom: 10px;">
+        <p style="font-size: medium;"><b>Prezzo:</b> {{data.prezzo}}</p>
+        <p style="font-size: medium;"><b>Marca:</b> {{data.marca}}</p>
+        <p style="font-size: medium;"><b>Tipo:</b> {{data.tipo}}</p>
+        <p style="font-size: medium;"><b>Taglia:</b> {{data.taglia}}</p>
+        <p style="font-size: medium;"><b>Colore:</b> {{data.colore}}</p>
+    </div>
 
-<div mat-dialog-actions [align]="'end'">
-    <button mat-raised-button [mat-dialog-close]="false">Annulla</button>
-    <button mat-raised-button [mat-dialog-close]="false">Contatta il venditore</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" [routerLink]="['confirm_purchase',this.data.id]">Conferma</button>
+    <div mat-dialog-actions [align]="'center'">
+        <a class="btn btn-default" target="_blank" href="{{hrefemail}}" style="margin: 10px;">Scrivi al Venditore</a>
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" style="margin: 10px;" [routerLink]="['confirm_purchase',this.data.id]">Conferma</button>
+    </div>
 </div>

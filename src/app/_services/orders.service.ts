@@ -41,4 +41,7 @@ export class OrdersService {
     };
     return this.http.post<any>(`${environment.apiUrl}/order/add`, order);
   }
+  update(id: any,status:any) {
+    return this.http.patch<any>(`${environment.apiUrl}/order/update?id=${id}`,{"status":status});
+  }
 }

@@ -8,7 +8,7 @@ export class Article{
   id_utente: number | undefined;
   marca: string | undefined;
   nome: string| undefined;
-  picture: string | undefined;
+  picture: any;
   image: SafeResourceUrl | undefined;
   sesso: string | undefined;
   prezzo: number |undefined;

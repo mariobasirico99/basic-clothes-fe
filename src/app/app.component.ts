@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
   onSettingsRedirect(): void {
     this.router.navigateByUrl(Path.Settings);
   }
+  
   onFeedbackRedirect(): void {
     this.router.navigateByUrl(Path.Feedback);
   }
@@ -50,10 +51,6 @@ export class AppComponent implements OnInit {
     return this.user && (this.user.role === Role.User);
   }
   ngOnInit() {
-  }
-
-  add(){
-    this.router.navigateByUrl("/addClothes");
   }
 
   logout() {

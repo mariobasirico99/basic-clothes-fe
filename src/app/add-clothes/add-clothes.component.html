@@ -26,7 +26,9 @@
                                 <p>
                                     <mat-form-field appearance="outline" class="full_width-input">
                                         <mat-label>Sesso</mat-label>
-                                        <input matInput placeholder="Sesso" formControlName="sesso" />
+                                        <mat-select [(value)]="sex" formControlName="sesso" [placeholder]="sex">
+                                            <mat-option *ngFor="let op of sessi" [value]="op.sesso">{{ op.sesso }}</mat-option>
+                                        </mat-select>
                                         <mat-error *ngIf=" f.sesso.errors && f.sesso.errors.required ">Il sesso è obbligatorio</mat-error>
                                     </mat-form-field>
                                 </p>
@@ -37,7 +39,9 @@
                                 <p>
                                     <mat-form-field appearance="outline" class="full_width-input">
                                         <mat-label>Marca</mat-label>
-                                        <input matInput placeholder="Marca" formControlName="marca" />
+                                        <mat-select [(value)]="mar" formControlName="marca" [placeholder]="mar">
+                                            <mat-option *ngFor="let op of marche" [value]="op.marca">{{ op.marca }}</mat-option>
+                                        </mat-select>
                                         <mat-error *ngIf=" f.marca.errors && f.marca.errors.required ">La marca è obbligatoria</mat-error>
                                     </mat-form-field>
                                 </p>
@@ -48,8 +52,9 @@
                                 <p>
                                     <mat-form-field appearance="outline" class="full_width-input">
                                         <mat-label>Tipo</mat-label>
-                                        <input matInput placeholder="T-shirt..." formControlName="tipo" />
-                                        <mat-error *ngIf=" f.tipo.errors && f.tipo.errors.required ">Il tipo è obbligatorio</mat-error>
+                                        <mat-select [(value)]="tip" formControlName="tipo" [placeholder]="tip">
+                                            <mat-option *ngFor="let tipo of tipi" [value]="tipo.tipo">{{ tipo.tipo }}</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </p>
                             </div>
@@ -72,7 +77,7 @@
                                 <p>
                                     <mat-form-field appearance="outline" class="full_width-input">
                                         <mat-label>Taglia</mat-label>
-                                        <mat-select [(value)]="tagl" formControlName="taglia" id="colore" [placeholder]="tagl">
+                                        <mat-select [(value)]="tagl" formControlName="taglia" id="taglia" [placeholder]="tagl">
                                             <mat-option *ngFor="let taglia of taglie" [value]="taglia.taglia">{{ taglia.taglia }}</mat-option>
                                         </mat-select>
                                         <mat-error *ngIf=" f.taglia.errors && f.taglia.errors.required ">La taglia è obbligatorio</mat-error>
@@ -83,7 +88,7 @@
                         <div class="row justify-content-center pt-1">
                             <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center">
                                 <p>
-                                    <mat-form-field class="col" apparance="outline">
+                                    <mat-form-field class="full_width-input" apparance="outline">
                                         <mat-label>Prezzo</mat-label>
                                         <input matInput placeholder="Prezzo" type="number" formControlName="prezzo">
                                     </mat-form-field>
@@ -94,7 +99,7 @@
 
                         <div class="row justify-content-center pt-1">
                             <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center" style="justify-content: center;">
-                                <div class="col" align="center">
+                                <div class="full_width-input" align="center">
                                     <label for="file">File</label>
                                     <input type="file" id="file" (change)="onFileChanged($event)">
                                     <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">

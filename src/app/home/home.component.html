@@ -1,66 +1,78 @@
-<div class="card mt-4">
-    <div class="card-header">
-        <div class="example-container row">
-            <mat-form-field appearance="fill" class="col-2 nop">
-                <mat-label>Brand</mat-label>
-                <input (keyup)="setBrandWithEvent($event)" [formControl]="myControl" [matAutocomplete]="auto" aria-label="Number" matInput placeholder="Insert brand" type="text">
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="brand = $event.option.value">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{option}}</mat-option>
-                </mat-autocomplete>
-                <!-- <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint> -->
-            </mat-form-field>
-            <mat-form-field class="col-3 nop" appearance="fill">
-                <mat-label>Taglia</mat-label>
-                <mat-select (selectionChange)="sizes = $event.value || []" multiple>
-                    <mat-option value="S">S</mat-option>
-                    <mat-option value="M">M</mat-option>
-                    <mat-option value="L">L</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="col-3 nop" appearance="fill">
-                <mat-label>Colore</mat-label>
-                <mat-select (selectionChange)="colors = $event.value || []" multiple>
-                    <mat-option value="blu">Blu</mat-option>
-                    <mat-option value="red">Rosso</mat-option>
-                    <mat-option value="orange">Arancione</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="col-1" apparance="fill">
-                <mat-label>Prezzo min:</mat-label>
-                <input (keyup)="setMinWithEvent($event)" matInput placeholder="0" type="number">
-            </mat-form-field>
-            <mat-form-field class="col-1" apparance="fill">
-                <mat-label>Prezzo max:</mat-label>
-                <input (keyup)="setMaxWithEvent($event)" matInput placeholder="100" type="number">
-            </mat-form-field>
+<div class="container-fluid" style="overflow-y:hidden;">
+    <div class="row" style="background-color: #005172;">
+        <div class="col-10">
+            <button mat-button (click)="reload('UOMO') " style="color: white;">UOMO</button>
+            <button mat-button (click)="reload('DONNA') " style="color: white;">DONNA</button>
+            <button mat-button (click)="reload('BAMBINI') " style="color: white;">BAMBINI</button>
+        </div>
+        <div class="col-2">
+            <button mat-button class="ml-auto" style="color: white;" (click)="add()">Aggiungi Vestito</button>
         </div>
     </div>
-    <div class="card-body">
-        <div class="row">
-            <mat-form-field appearance="fill" class="col-2 nop">
-                <mat-label>Ordina per</mat-label>
-                <mat-select (selectionChange)="order = $event.value" [(value)]="order">
-                    <mat-option value="">Dal più recente</mat-option>
-                    <mat-option value="ASC">prezzo ascendente</mat-option>
-                    <mat-option value="DESC">prezzo discendente</mat-option>
-                </mat-select>
-            </mat-form-field>
+
+    <div class="row card">
+        <div class="card-header" style="background-color: white !important;">
+            <div class="example-container">
+                <mat-form-field appearance="outline" class="col-2 full_width-input ">
+                    <mat-label>Tipo</mat-label>
+                    <mat-select (selectionChange)="type=$event.value || []" multiple>
+                        <mat-option *ngFor="let tipo of tipi" [value]="tipo.tipo">{{ tipo.tipo }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-2 full_width-input ">
+                    <mat-label>Brand</mat-label>
+                    <mat-select (selectionChange)="brands=$event.value || []" multiple>
+                        <mat-option *ngFor="let brand of marche" [value]="brand.marca">{{ brand.marca }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-2 full_width-input ">
+                    <mat-label>Taglia</mat-label>
+                    <mat-select (selectionChange)="sizes=$event.value || []" multiple>
+                        <mat-option *ngFor="let taglia of taglie" [value]="taglia.taglia">{{ taglia.taglia }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-2 full_width-input " appearance="outline">
+                    <mat-label>Colore</mat-label>
+                    <mat-select (selectionChange)="colors=$event.value || []" multiple>
+                        <mat-option *ngFor="let colore of colori" [value]="colore.colore">{{ colore.colore }}</mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+                <mat-form-field class="col-1 full_width-input " apparance="outline ">
+                    <mat-label>Prezzo min:</mat-label>
+                    <input (keyup)="setMinWithEvent($event)" matInput placeholder="0 " type="number ">
+                </mat-form-field>
+                <mat-form-field class="col-1 full_width-input " apparance="outline ">
+                    <mat-label>Prezzo max:</mat-label>
+                    <input (keyup)="setMaxWithEvent($event)" matInput placeholder="100 " type="number ">
+                </mat-form-field>
+                <mat-form-field appearance="outline" align="end" class="col-2" style="margin-top: 10px;">
+                    <mat-label>Ordina per</mat-label>
+                    <mat-select (selectionChange)="order=$event.value" [(value)]="order">
+                        <mat-option value="">Dal più recente</mat-option>
+                        <mat-option value="ASC">prezzo ascendente</mat-option>
+                        <mat-option value="DESC">prezzo discendente</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
-        <div class="content">
-            <mat-spinner *ngIf="clothes == null "></mat-spinner>
-            <div class="row">
-                <div class="col-md-3 mx-auto my-5" *ngFor="let article of getFilteredClothes()">
-                    <mat-card class="mat-elevation-z4" (click)="openDialog(article)">
-                        <mat-card-header>
-                            <mat-card-title>
-                                {{article.nome}}
-                            </mat-card-title>
-                        </mat-card-header>
-                        <img mat-card-image [src]="article.image" class="img-fluid item">
-                        <mat-card-content>
-                            <p>Prezzo: {{article.prezzo}}</p>
-                        </mat-card-content>
-                    </mat-card>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <mat-spinner *ngIf="clothes==null"></mat-spinner>
+                    <div class="col-md-2 mx-auto my-5 " *ngFor="let article of getFilteredClothes()">
+                        <mat-card class="mat-elevation-z4 " (click)="openDialog(article)" style="justify-content: center; position: flex;" align="center">
+                            <mat-card-header style="justify-content: center; display: flex;">
+                                <mat-card-title>
+                                    {{article.nome}}
+                                </mat-card-title>
+                            </mat-card-header>
+                            <img align="center" mat-card-image [src]="_sanitizer.bypassSecurityTrustResourceUrl( 'data:image/png;base64,'+article.picture)" class="img-fluid item">
+                            <mat-card-content>
+                                <p>Prezzo: {{article.prezzo}}</p>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </div>

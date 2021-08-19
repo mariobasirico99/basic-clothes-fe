@@ -61,7 +61,12 @@ export class OrderComponent implements OnInit {
       });
     }
   }
-
+  changeStatus(id :any, status:any){
+    this.orderService.update(id,status).pipe(first()).subscribe((res)=>{
+      console.log(res)
+      this.onOrdersLoading();
+    })
+  }
   onOrderReso(id: number){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.id = 'modal-component';

@@ -24,41 +24,10 @@
           </button>
 
     </mat-toolbar-row>
-    <mat-toolbar-row>
-        <button mat-button [matMenuTriggerFor]="aboveMenu" color="#ffffff">Uomo</button>
-        <mat-menu #aboveMenu="matMenu" yPosition="above">
-            <button mat-menu-item>T-shirt</button>
-            <button mat-menu-item>Trousers</button>
-        </mat-menu>
-
-        <button mat-button [matMenuTriggerFor]="belowMenu" color="#ffffff">Donna</button>
-        <mat-menu #belowMenu="matMenu" yPosition="below">
-            <button mat-menu-item>T-shirt</button>
-            <button mat-menu-item>Trousers</button>
-        </mat-menu>
-
-        <button mat-button [matMenuTriggerFor]="beforeMenu" color="#ffffff">Bambini</button>
-        <mat-menu #beforeMenu="matMenu" xPosition="before">
-            <button mat-menu-item>T-shirt</button>
-            <button mat-menu-item>Trousers</button>
-        </mat-menu>
-        <button mat-button align="end" color="#ffffff" (click)="add()">Aggiungi Vestito</button>
-    </mat-toolbar-row>
-
-
-
-    <!-- <button mat-button>
-        <mat-icon>account_circle</mat-icon>
-        {{ user.firstName }} {{ user.lastName }}
-      </button> -->
-
-
-
-
 </mat-toolbar>
 
 
-<mat-drawer-container [ngClass]="{
+<mat-drawer-container style="overflow-y:hidden; height: 100%; background-color: white !important;" [ngClass]="{
     'h-100': !user || !user.token,
     'app-container': user && user.token
   }" [hasBackdrop]="true">

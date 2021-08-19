@@ -1,0 +1,11 @@
+<div class="container" *ngIf="done">
+    <h1 [align]="'center'"><b>{{user.username}}</b></h1>
+    <div *ngFor="let f of feed">
+        <div>
+            <p><b>Scrittore:</b> {{f.scrittore!.username}}</p>
+            <p><b>Voto:</b> {{f.voto}}</p>
+            <p><b>Feedback:</b> {{f.descrizione}}</p>
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+</div>
