@@ -30,4 +30,7 @@ export class ArticleService {
   getImage(id:number){
     return this.http.get<any>(`${environment.apiUrl}/article/getimage?id=${id}`);
   }
+  delete(id:any){
+    return this.http.delete<any>(`${environment.apiUrl}/article/delete?id=${id}`);
+  }
 }

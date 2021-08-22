@@ -26,4 +26,7 @@ export class FeedbackService {
   getRankingByUser(id:number) {
     return this.http.get<any>(`${environment.apiUrl}/feedback/getRankingByUser?id=${id}`);
   }
+  delete(id:any){
+    return this.http.delete<any>(`${environment.apiUrl}/feedback/delete?id=${id}`);
+  }
 }

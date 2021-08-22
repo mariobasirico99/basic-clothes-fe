@@ -1,4 +1,4 @@
-<div class="container pt-4 h-100">
+<div class="container pt-4 h-100" *ngIf="!isAdmin">
     <app-page-spinner *ngIf="loading"></app-page-spinner>
     <div *ngIf="!loading" class="row justify-content-center" align="center">
         <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10 col-sm-12 col-12" style="width: 90%;" align="center">
@@ -117,5 +117,60 @@
                 </div>
             </form>
         </div>
+    </div>
+</div>
+<div class="row pt-2" style="width: 80%; margin-left: 10%;" *ngIf="isAdmin">
+    <div class="row justify-content-center">
+        <div class="col">
+            <h1 id="modal-title" align="center">Gestione Utenti</h1>
+        </div>
+
+    </div>
+    <div class="col mat-elevation-z8 px-0" align="center">
+        <table [dataSource]="dataSource" mat-table matSort>
+            <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="ID" style="color: black;">ID</th>
+                <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Username">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="Username" style="color: black;">Username</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.username }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="Email" style="color: black;">Email</th>
+
+                <td mat-cell *matCellDef="let element">
+                    {{ element.email }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef style="color: black;">Azione</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngIf="isAdmin" (click)="deleteItem(element.id)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Elimina</span>
+                        </button>
+                    </mat-menu>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">
+                    Non trovo nessun risultato con questa ricerca
+                </td>
+            </tr>
+        </table>
+        <app-page-spinner *ngIf="loading"></app-page-spinner>
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
     </div>
 </div>

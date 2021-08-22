@@ -17,11 +17,13 @@ import { ColorsService } from '../_services/colors.service';
 import { TipiService } from '../_services/tipi.service';
 import { MarcheService } from '../_services/marche.service';
 import { Path } from '../_models/path';
+import { Role } from '../_models/role';
 
 @Component({templateUrl: 'home.component.html'})
 export class HomeComponent implements OnInit, OnChanges {
     loading = false;
     public user: any;
+    public utente :any;
     userFromApi!: User;
     taglie : any;
     tipi:any
@@ -59,9 +61,9 @@ export class HomeComponent implements OnInit, OnChanges {
         public dialog: MatDialog
     ) {
         this.user = JSON.parse(localStorage.getItem('user')!);
+        console.log(this.user)
         this.userService.getById(this.user.userId).pipe(first()).subscribe((res)=>{
-            console.log(res)
-            this.user = res
+            this.utente = res
         })
     }
 
@@ -71,7 +73,7 @@ export class HomeComponent implements OnInit, OnChanges {
         this.marche = this.marcheService.getall().marche;
         this.tipi = this.tipoService.getall().tipi;
         
-        this.reload(this.user.sesso)
+        this.reload(null)
     }
     add(){
         this.router.navigateByUrl("/addClothes");
@@ -91,34 +93,10 @@ export class HomeComponent implements OnInit, OnChanges {
                     this.router.navigateByUrl(Path.Home);
                 });
             }
-            else{
-                this.articleService.notMineAndSex(this.user.id,sesso).pipe(first()).subscribe((art) => {
-                    this.loading = true;
-                    this.done = false;
-                    this.clothes = art.filter(article =>
-                        article.venduto === false
-                        && article.prezzo != null
-                    )
-                    this.loading = false
-                    this.router.navigateByUrl(Path.Home);
-                });
-            }
         }
         else{
             if(this.user.userId != undefined){
                 this.articleService.notMine(this.user.userId).pipe(first()).subscribe((art) => {
-                    this.loading = true;
-                    this.done = false;
-                    this.clothes = art.filter(article =>
-                        article.venduto === false
-                        && article.prezzo != null
-                    )
-                    this.loading = false
-                    this.router.navigateByUrl(Path.Home);
-                });
-            }
-            else{
-                this.articleService.notMine(this.user.id).pipe(first()).subscribe((art) => {
                     this.loading = true;
                     this.done = false;
                     this.clothes = art.filter(article =>
@@ -262,4 +240,16 @@ export class HomeComponent implements OnInit, OnChanges {
 
         return this.marche.filter((marche: string) => marche.toLowerCase().includes(filterValue));
     }
+    get isAdmin() {
+        return (
+          this.user &&
+          (this.user.roles[0].role === Role.Admin)
+        );
+      }
+      deleteItem(id:any){
+        this.articleService.delete(id).pipe(first()).subscribe((res)=>{
+          console.log(res)
+        })
+        this.reload(null)
+      }
 }

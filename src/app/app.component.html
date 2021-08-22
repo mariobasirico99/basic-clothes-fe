@@ -15,7 +15,8 @@
         <span class="spacer"></span>
         <button mat-button [matMenuTriggerFor]="settingMenu" color="#ffffff"><mat-icon>account_circle</mat-icon></button>
         <mat-menu #settingMenu="matMenu" yPosition="below">
-            <button mat-menu-item (click)="onSettingsRedirect()">Mio Account</button>
+            <button mat-menu-item (click)="onSettingsRedirect()" *ngIf="!isAdmin">Account</button>
+            <button mat-menu-item (click)="onSettingsRedirect()" *ngIf="isAdmin">Utenti</button>
             <button mat-menu-item (click)="onOrdersRedirect()">Ordini</button>
             <button mat-menu-item (click)="onFeedbackRedirect()">Feedback</button>
         </mat-menu>

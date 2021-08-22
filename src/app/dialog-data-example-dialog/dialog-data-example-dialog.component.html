@@ -16,7 +16,8 @@
     </div>
 
     <div mat-dialog-actions [align]="'center'">
-        <a class="btn btn-default" target="_blank" href="{{hrefemail}}" style="margin: 10px;">Scrivi al Venditore</a>
+        <a class="btn btn-default" target="_blank" href="{{hrefemail}}" style="margin: 10px;">Venditore</a>
+        <button *ngIf="isAdmin" mat-button (click)="deleteItem(data.id) ">Elimina</button>
         <button mat-raised-button color="primary" [mat-dialog-close]="true" style="margin: 10px;" [routerLink]="['confirm_purchase',this.data.id]">Conferma</button>
     </div>
 </div>

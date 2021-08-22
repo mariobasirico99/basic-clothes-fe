@@ -42,7 +42,7 @@
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item (click)="onOrderReso(element.id)">
-                            <mat-icon>delete</mat-icon>
+                            <mat-icon>settings</mat-icon>
                             <span>Reso</span>
                         </button>
 
@@ -57,6 +57,10 @@
                         <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'Consegnato')">
                             <mat-icon>info</mat-icon>
                             <span>Consegnato</span>
+                        </button>
+                        <button mat-menu-item *ngIf="isAdmin" (click)="deleteItem(element.id)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Elimina</span>
                         </button>
                     </mat-menu>
                 </td>

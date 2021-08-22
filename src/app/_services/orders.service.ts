@@ -44,4 +44,7 @@ export class OrdersService {
   update(id: any,status:any) {
     return this.http.patch<any>(`${environment.apiUrl}/order/update?id=${id}`,{"status":status});
   }
+  delete(id:any){
+    return this.http.delete<any>(`${environment.apiUrl}/order/delete?id=${id}`);
+  }
 }

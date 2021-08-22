@@ -17,6 +17,7 @@ export class FeedbackPageComponent implements OnInit {
     'Scrittore',
     'Voto',
     'Descrizione',
+    'action'
   ];
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
@@ -32,7 +33,12 @@ export class FeedbackPageComponent implements OnInit {
   ngOnInit(): void {
     this.onFeedbackLoading()
   }
-
+  deleteItem(id:any){
+    this.feedbackService.delete(id).pipe(first()).subscribe((res)=>{
+      console.log(res)
+      this.onFeedbackLoading();
+    })
+  }
   onFeedbackLoading() {
     this.loading = true;
     this.dataSource = null

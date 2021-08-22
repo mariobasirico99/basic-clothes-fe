@@ -104,4 +104,9 @@ export class OrderComponent implements OnInit {
       (this.user.roles[0].role === Role.Admin)
     );
   }
+  deleteItem(id:any){
+    this.orderService.delete(id).pipe(first()).subscribe((res)=>{
+      console.log(res)
+    })
+  }
 }
