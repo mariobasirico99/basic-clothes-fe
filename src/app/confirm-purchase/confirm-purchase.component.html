@@ -9,7 +9,7 @@
                             <mat-radio-button value="saved" (click)="changeInfoSaved()">Usa le Informazioni salvate</mat-radio-button>
                             <mat-radio-button value="insert" (click)="changeInfoInsert()">Inserisci nuove Informazioni</mat-radio-button>
                         </mat-radio-group>
-                        <button mat-button matStepperNext>Next</button>
+                        <button mat-button matStepperNext>Avanti</button>
                     </div>
                     <form [formGroup]="firstFormGroup" class="form" *ngIf="info">
                         <div class="inputData">
@@ -29,7 +29,6 @@
                                 <mat-label>CAP</mat-label>
                                 <input matInput *ngIf="info" placeholder="CAP" formControlName="cap">
                             </mat-form-field>
-                            <button mat-button matStepperNext>Next</button>
                         </div>
                     </form>
                 </mat-step>
@@ -46,7 +45,7 @@
                                 </mat-radio-group>
                             </div>
                             <div style="flex-direction: row">
-                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperPrevious>Indietro</button>
                                 <button mat-button matStepperNext (click)="confirmPurchase()">Next</button>
                             </div>
                         </div>
@@ -54,7 +53,7 @@
                     </form>
                 </mat-step>
                 <mat-step>
-                    <ng-template matStepLabel>Done</ng-template>
+                    <ng-template matStepLabel>Fine</ng-template>
                     <div class="inputData">
                         <p *ngIf="!loading">L'acquisto è andato a buon fine. A breve ti arriverà un mail di conferma</p>
                         <div style="flex-direction: row">

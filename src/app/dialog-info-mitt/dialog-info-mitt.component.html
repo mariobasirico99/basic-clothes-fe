@@ -1,5 +1,6 @@
 <div class="container" *ngIf="done">
     <h1 [align]="'center'"><b>{{user.username}}</b></h1>
+    <h2>[align]="'center'"><b>Feedback</b></h2>
     <div *ngFor="let f of feed">
         <div>
             <p><b>Scrittore:</b> {{f.scrittore!.username}}</p>
