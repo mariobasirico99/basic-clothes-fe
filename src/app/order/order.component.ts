@@ -24,7 +24,7 @@ export class OrderComponent implements OnInit {
   ];
   dataSource: any;
   loading = false;
-  user:any;
+  public user:any;
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   constructor(

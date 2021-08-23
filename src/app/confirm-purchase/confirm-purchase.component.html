@@ -56,10 +56,9 @@
                 <mat-step>
                     <ng-template matStepLabel>Done</ng-template>
                     <div class="inputData">
-                        <p>L'acquisto è andato a buon fine. A breve ti arriverà un mail di conferma</p>
+                        <p *ngIf="!loading">L'acquisto è andato a buon fine. A breve ti arriverà un mail di conferma</p>
                         <div style="flex-direction: row">
-                            <button mat-button matStepperPrevious>Back</button>
-                            <button mat-button [routerLink]="['home']">Home</button>
+                            <button mat-button [routerLink]="['home']" *ngIf="!loading">Home</button>
                         </div>
                     </div>
                 </mat-step>

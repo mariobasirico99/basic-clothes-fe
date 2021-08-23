@@ -23,7 +23,6 @@ export class SettingComponent implements OnInit {
     'Id',
     'Username',
     'Email',
-    'action',
   ];
   dataSource: any;
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -102,10 +101,5 @@ export class SettingComponent implements OnInit {
           },
         });
       
-  }
-  deleteItem(id:any){
-    this.userService.delete(id).pipe(first()).subscribe((res)=>{
-      console.log(res)
-    })
   }
 }

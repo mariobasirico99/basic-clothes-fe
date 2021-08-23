@@ -41,7 +41,7 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="onOrderReso(element.id)">
+                        <button mat-menu-item *ngIf="element.status == 'Consegnato' && user.userId == element.destinatario.id" (click)="onOrderReso(element.id)">
                             <mat-icon>settings</mat-icon>
                             <span>Reso</span>
                         </button>

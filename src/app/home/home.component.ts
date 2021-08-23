@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit, OnChanges {
     }
     reload(sesso:any){
         console.log(sesso)
-        if(sesso != null && sesso!=undefined){
+        if(sesso != null && sesso!=undefined && sesso !== "TUTTI"){
             if(this.user.userId !=undefined){
                 this.articleService.notMineAndSex(this.user.userId,sesso).pipe(first()).subscribe((art) => {
                     this.loading = true;

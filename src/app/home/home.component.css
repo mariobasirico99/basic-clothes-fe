@@ -5,3 +5,17 @@
 .cards {
     max-width: 300px;
 }
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 20px);
+    background: red;
+}
+
+.inner {
+    background: green;
+    color: white;
+    padding: 12px;
+}

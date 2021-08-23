@@ -9,8 +9,13 @@
         <div id="modal-body" align="center" style="justify-content: center;">
             <p>Sei sicuro di voler effetuare il reso?</p>
             <button mat-raised-button color="primary" (click)="reso()">
-                <span> Effettua Reso </span>
-              </button>
+                <span *ngIf="!loading">Effettua Reso</span>
+                                <div class="row my-2" *ngIf="loading">
+                                  <div class="col" align="center">
+                                    <mat-spinner diameter="20" color="accent"></mat-spinner>
+                                  </div>
+                                </div>
+                                </button>
         </div>
     </div>
 </div>

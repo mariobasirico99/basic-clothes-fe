@@ -1,5 +1,5 @@
-<div class="loginBackground">
-    <div class="container-fluid">
+<div class="cont w-100" style="overflow-y: hidden;">
+    <div class="container-fluid w-100">
         <div class="row justify-content-center">
             <!-- Col contenente la card con il form di Login -->
             <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-7 col-sm-9 col-12 align-self-center" style="margin-top: 30px;margin-bottom: 30px;">
@@ -98,7 +98,7 @@
                         </div>
 
                         <div class="row justify-content-center pt-1">
-                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center" style="justify-content: center;">
+                            <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center" style="justify-content: center; display: flex;">
                                 <div class="full_width-input" align="center">
                                     <label for="file">File</label>
                                     <input type="file" id="file" (change)="onFileChanged($event)">
@@ -113,7 +113,7 @@
                                 <p *ngIf="error" class="error-message">{{ error }}</p>
                             </div>
                         </div>
-                        <div class="row justify-content-center pt-3 pb-5">
+                        <div class="row justify-content-center pt-1 pb-3">
                             <div class="col" align="center">
                                 <button type="submit" [disabled]="loading" mat-raised-button color="primary">
                                 <span *ngIf="!loading"> Salva </span>
@@ -125,7 +125,7 @@
                               </button>
                             </div>
                         </div>
-                        <div class="row justify-content-center pt-3 pb-5">
+                        <div class="row justify-content-center pt-1 pb-3">
                             <div class="col" align="center">
                                 <button type="button" [disabled]="loading" mat-raised-button color="primary" (click)="goBack()">
                                 <span *ngIf="!loading"> Indietro </span>

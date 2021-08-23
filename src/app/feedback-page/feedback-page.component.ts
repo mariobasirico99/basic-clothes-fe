@@ -13,12 +13,8 @@ import { FeedbackService } from '../_services/feedback.service';
   styleUrls: ['./feedback-page.component.css']
 })
 export class FeedbackPageComponent implements OnInit {
-  displayedColumns: string[] = [
-    'Scrittore',
-    'Voto',
-    'Descrizione',
-    'action'
-  ];
+
+  displayedColumns: string[] = []
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   user: any;
@@ -28,6 +24,21 @@ export class FeedbackPageComponent implements OnInit {
     private feedbackService : FeedbackService
   ) { 
     this.user = JSON.parse(localStorage.getItem('user')!);
+    if(this.isAdmin){
+      this.displayedColumns = [
+        'Scrittore',
+        'Voto',
+        'Descrizione',
+        'action'
+      ];
+    }
+    else{
+      this.displayedColumns = [
+        'Scrittore',
+        'Voto',
+        'Descrizione'
+      ];
+    }
   }
 
   ngOnInit(): void {
