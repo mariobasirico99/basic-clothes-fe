@@ -32,7 +32,12 @@
                     {{ element.status }}
                 </td>
             </ng-container>
-
+            <ng-container matColumnDef="Pagamento">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="Pagamento" style="color: black;">Pagamento</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.pagamento }}
+                </td>
+            </ng-container>
 
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef style="color: black;">Azione</th>
@@ -41,7 +46,7 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item *ngIf="element.status == 'Consegnato' && user.userId == element.destinatario.id" (click)="onOrderReso(element.id)">
+                        <button mat-menu-item *ngIf="element.status == 'CONSEGNATO' && user.userId == element.destinatario.id" (click)="onOrderReso(element.id)">
                             <mat-icon>settings</mat-icon>
                             <span>Reso</span>
                         </button>
@@ -50,13 +55,17 @@
                             <mat-icon>info</mat-icon>
                             <span>Lascia un feedback</span>
                         </button>
-                        <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'Confermato')">
+                        <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'CONFERMATO')">
                             <mat-icon>info</mat-icon>
                             <span>Conferma</span>
                         </button>
-                        <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'Consegnato')">
+                        <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'CONSEGNATO')">
                             <mat-icon>info</mat-icon>
                             <span>Consegnato</span>
+                        </button>
+                        <button mat-menu-item *ngIf="isAdmin && element.pagamento !== 'PAGATO'" (click)="changePagamento(element.id,'PAGATO')">
+                            <mat-icon>info</mat-icon>
+                            <span>Pagato</span>
                         </button>
                         <button mat-menu-item *ngIf="isAdmin" (click)="deleteItem(element.id)">
                             <mat-icon>delete</mat-icon>

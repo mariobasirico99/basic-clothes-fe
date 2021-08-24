@@ -27,30 +27,61 @@
                             </mat-form-field>
                             <mat-form-field style="width:50%" appearance="outline">
                                 <mat-label>CAP</mat-label>
-                                <input matInput *ngIf="info" placeholder="CAP" formControlName="cap">
+                                <input matInput placeholder="CAP" formControlName="cap">
                             </mat-form-field>
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="secondFormGroup" errorMessage="Payout is required.">
-                    <form [formGroup]="secondFormGroup">
+                <mat-step [stepControl]="secondFormGroup" errorMessage="Il Pagamento è obbligatorio.">
+                    <form>
                         <ng-template matStepLabel>Pagamento</ng-template>
                         <div class="inputData">
                             <h2>Seleziona il metodo di pagamento</h2>
                             <div class="row">
-                                <mat-radio-group class="inputData" [formGroup]="secondFormGroup">
-                                    <mat-radio-button class="example-margin" value="carta" [disabled]="true">Carta di credito/debito</mat-radio-button>
-                                    <mat-radio-button class="example-margin" value="contanti">Contanti</mat-radio-button>
-                                    <mat-radio-button class="example-margin" value="paypal" [disabled]="true">PayPal</mat-radio-button>
+                                <mat-radio-group class="inputData">
+                                    <mat-radio-button value="carta" (click)="change('card')">Carta di credito/debito</mat-radio-button>
+                                    <mat-radio-button value="contanti" (click)="change('contanti')">Contanti</mat-radio-button>
+                                    <mat-radio-button value="paypal" [disabled]="true">PayPal</mat-radio-button>
                                 </mat-radio-group>
                             </div>
-                            <div style="flex-direction: row">
-                                <button mat-button matStepperPrevious>Indietro</button>
-                                <button mat-button matStepperNext (click)="confirmPurchase()">Next</button>
+                        </div>
+                    </form>
+                    <form [formGroup]="payForm" class="form" *ngIf="card" (ngSubmit)="chargeCreditCard()">
+                        <div class="inputData">
+                            <mat-form-field style="width:50%" appearance="outline">
+                                <mat-label>Numero Carta</mat-label>
+                                <input matInput placeholder="Numero Carta" formControlName="num">
+                            </mat-form-field>
+                            <mat-form-field style="width:50%" appearance="outline">
+                                <mat-label>Mese</mat-label>
+                                <input matInput placeholder="Mese" formControlName="mese">
+                            </mat-form-field>
+                            <mat-form-field style="width:50%" appearance="outline">
+                                <mat-label>Anno</mat-label>
+                                <input matInput placeholder="Anno" formControlName="anno">
+                            </mat-form-field>
+                            <mat-form-field style="width:50%" appearance="outline">
+                                <mat-label>CVC</mat-label>
+                                <input matInput placeholder="CVC" formControlName="cvc">
+                            </mat-form-field>
+                            <div class="row justify-content-center pt-1 pb-3">
+                                <div class="col" align="center">
+                                    <button type="submit" matStepperNext [disabled]="loading" mat-raised-button color="primary">
+                                    <span *ngIf="!loading"> Conferma </span>
+                                    <div class="row my-2" *ngIf="loading">
+                                      <div class="col" align="center">
+                                        <mat-spinner diameter="20" color="accent"></mat-spinner>
+                                      </div>
+                                    </div>
+                                  </button>
+                                </div>
                             </div>
                         </div>
-
                     </form>
+                    <div class="inputData" style="flex-direction: row">
+                        <button mat-button matStepperPrevious>Indietro</button>
+                        <button mat-button matStepperNext *ngIf="!card" (click)="confirmPurchase('ALLA CONSEGNA')">Avanti</button>
+                    </div>
                 </mat-step>
                 <mat-step>
                     <ng-template matStepLabel>Fine</ng-template>

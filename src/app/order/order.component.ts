@@ -20,6 +20,7 @@ export class OrderComponent implements OnInit {
     'Destinatario',
     'Articolo',
     'Stato',
+    'Pagamento',
     'action',
   ];
   dataSource: any;
@@ -63,6 +64,12 @@ export class OrderComponent implements OnInit {
   }
   changeStatus(id :any, status:any){
     this.orderService.update(id,status).pipe(first()).subscribe((res)=>{
+      console.log(res)
+      this.onOrdersLoading();
+    })
+  }
+  changePagamento(id :any, status:any){
+    this.orderService.updatePayment(id,status).pipe(first()).subscribe((res)=>{
       console.log(res)
       this.onOrdersLoading();
     })

@@ -11,6 +11,9 @@ export class ArticleService {
   getAll() {
       return this.http.get<Article[]>(`${environment.apiUrl}/article/getall`);
   }
+  getById(id: number) {
+    return this.http.get<any>(`${environment.apiUrl}/article/getById?id=${id}`);
+}
   notMineAndSex(id_utente : any, sex:string){
     return this.http.get<Article[]>(`${environment.apiUrl}/article/notMineAndSex?id=${id_utente}&sex=${sex}`);
   }

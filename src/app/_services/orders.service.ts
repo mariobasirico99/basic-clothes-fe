@@ -37,11 +37,15 @@ export class OrdersService {
       mittente: addForm.mittente,
       destinatario : addForm.destinatario,
       articolo : addForm.articolo,
+      pagamento : addForm.pagamento
     };
     return this.http.post<any>(`${environment.apiUrl}/order/add`, order);
   }
   update(id: any,status:any) {
     return this.http.patch<any>(`${environment.apiUrl}/order/update?id=${id}`,{"status":status});
+  }
+  updatePayment(id: any,status:any) {
+    return this.http.patch<any>(`${environment.apiUrl}/order/updatePayment?id=${id}`,{"status":status});
   }
   delete(id:any){
     return this.http.delete<any>(`${environment.apiUrl}/order/delete?id=${id}`);
