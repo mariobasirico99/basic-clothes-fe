@@ -45,7 +45,7 @@ export class OrdersService {
     return this.http.patch<any>(`${environment.apiUrl}/order/update?id=${id}`,{"status":status});
   }
   updatePayment(id: any,status:any) {
-    return this.http.patch<any>(`${environment.apiUrl}/order/updatePayment?id=${id}`,{"status":status});
+    return this.http.patch<any>(`${environment.apiUrl}/order/updatePayment?id=${id}`,{"pagamento":status});
   }
   delete(id:any){
     return this.http.delete<any>(`${environment.apiUrl}/order/delete?id=${id}`);
