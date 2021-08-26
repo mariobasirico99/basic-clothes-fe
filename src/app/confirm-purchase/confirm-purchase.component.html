@@ -6,8 +6,8 @@
                     <ng-template matStepLabel>Informazioni</ng-template>
                     <div class="row" style="margin-top:10px;">
                         <mat-radio-group class="inputData">
-                            <mat-radio-button value="saved" (click)="changeInfoSaved()">Usa le Informazioni salvate</mat-radio-button>
-                            <mat-radio-button value="insert" (click)="changeInfoInsert()">Inserisci nuove Informazioni</mat-radio-button>
+                            <mat-radio-button value="saved" (click)="changeInfoSaved()">Usa le Informazioni salvate durante la Registrazione</mat-radio-button>
+                            <mat-radio-button value="insert" (click)="changeInfoInsert()">Inserisci nuove Informazioni di Spedizione</mat-radio-button>
                         </mat-radio-group>
                         <button mat-button matStepperNext>Avanti</button>
                     </div>
@@ -41,7 +41,6 @@
                                 <mat-radio-group class="inputData">
                                     <mat-radio-button value="carta" (click)="change('card')">Carta di credito/debito</mat-radio-button>
                                     <mat-radio-button value="contanti" (click)="change('contanti')">Contanti</mat-radio-button>
-                                    <mat-radio-button value="paypal" [disabled]="true">PayPal</mat-radio-button>
                                 </mat-radio-group>
                             </div>
                         </div>
