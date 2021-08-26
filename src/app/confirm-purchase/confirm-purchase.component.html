@@ -48,7 +48,8 @@
                     <form [formGroup]="payForm" class="form" *ngIf="card" (ngSubmit)="chargeCreditCard()">
                         <div class="inputData">
                             <mat-form-field style="width:50%" appearance="outline">
-                                <mat-label>Numero Carta</mat-label>
+                                <mat-label>
+                                    <mat-icon>credit_card</mat-icon> Numero Carta</mat-label>
                                 <input matInput placeholder="Numero Carta" formControlName="num">
                             </mat-form-field>
                             <mat-form-field style="width:50%" appearance="outline">

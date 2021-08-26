@@ -16,8 +16,10 @@
     </div>
 
     <div mat-dialog-actions [align]="'center'">
-        <a class="btn btn-default" target="_blank" href="{{hrefemail}}" style="margin: 10px;">Venditore</a>
-        <button *ngIf="isAdmin" mat-button (click)="deleteItem(data.id) ">Elimina</button>
+        <a class="btn btn-default" target="_blank" href="{{hrefemail}}" style="margin-top: 10px;">
+            <mat-icon> email</mat-icon>
+        </a>
+        <button *ngIf="isAdmin" mat-button (click)="deleteItem(data.id) "><mat-icon>delete_forever</mat-icon></button>
         <button mat-raised-button color="primary" [mat-dialog-close]="true" style="margin: 10px;" [routerLink]="['confirm_purchase',this.data.id]">Conferma</button>
     </div>
 </div>

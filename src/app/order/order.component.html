@@ -52,23 +52,23 @@
                         </button>
 
                         <button mat-menu-item (click)="onOrderFeedBack(element.mittente.id, element.mittente.username)">
-                            <mat-icon>info</mat-icon>
+                            <mat-icon>chat</mat-icon>
                             <span>Lascia un feedback</span>
                         </button>
                         <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'CONFERMATO')">
-                            <mat-icon>info</mat-icon>
+                            <mat-icon>done</mat-icon>
                             <span>Conferma</span>
                         </button>
                         <button mat-menu-item *ngIf="isAdmin" (click)="changeStatus(element.id,'CONSEGNATO')">
-                            <mat-icon>info</mat-icon>
+                            <mat-icon>send</mat-icon>
                             <span>Consegnato</span>
                         </button>
                         <button mat-menu-item *ngIf="isAdmin && element.pagamento !== 'PAGATO'" (click)="changePagamento(element.id,'PAGATO')">
-                            <mat-icon>info</mat-icon>
+                            <mat-icon>euro_symbol</mat-icon>
                             <span>Pagato</span>
                         </button>
                         <button mat-menu-item *ngIf="isAdmin" (click)="deleteItem(element.id)">
-                            <mat-icon>delete</mat-icon>
+                            <mat-icon>delete_forever</mat-icon>
                             <span>Elimina</span>
                         </button>
                     </mat-menu>
