@@ -19,6 +19,9 @@ export class TipiService {
             tipo: 'POLO',
           },
           {
+            tipo: 'VESTITO',
+          },
+          {
             tipo: 'CAMICIA',
           },
           {

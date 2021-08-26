@@ -5,7 +5,9 @@
             <form [formGroup]="addForm" (ngSubmit)="onSubmit()" *ngIf="addForm">
                 <mat-card>
                     <mat-card-header style="justify-content: center; display: flex;">
-                        <mat-card-title>Informazioni Utente</mat-card-title>
+                        <mat-card-title>Informazioni Utente
+                            <mat-icon> account_box</mat-icon>
+                        </mat-card-title>
                         <mat-card-subtitle>Cliccando sul singolo riquadro, puoi modificare le tue informazioni!
                         </mat-card-subtitle>
                     </mat-card-header>

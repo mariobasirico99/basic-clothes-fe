@@ -16,16 +16,13 @@ export class OrdersService {
   }
 
   getById(id: number) {
-    console.log(id)
     return this.http.get<Orders[]>(`${environment.apiUrl}/order/getById?id=${id}`);
   }
 
   getByIdDest(id: number) {
-    console.log(id)
     return this.http.get<Orders[]>(`${environment.apiUrl}/order/getByIdDest?id=${id}`);
   }
   reso(order : Orders){
-    console.log(order)
     return this.http.post<Orders>(`${environment.apiUrl}/order/reso?id=${order}`,{});
   }
   add(addForm: any) {
