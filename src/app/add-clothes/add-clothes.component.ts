@@ -78,9 +78,7 @@ export class AddClothesComponent implements OnInit {
   
   onSubmit() {
     this.loading = true
-    console.log(this.selectedFile)
     this.articleService.add(this.form.value).pipe(first()).subscribe((res)=>{
-      console.log(res)
       const uploadImageData = new FormData();
       uploadImageData.append('imageValue', this.selectedFile);
 

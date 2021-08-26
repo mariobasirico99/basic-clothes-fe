@@ -42,5 +42,5 @@ export class UserService {
     }
     delete(id:any){
         return this.http.delete<any>(`${environment.apiUrl}/user/delete?id=${id}`);
-      }
+    }
 }

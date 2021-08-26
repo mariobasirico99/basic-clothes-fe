@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { DialogInfoMittComponent } from '../dialog-info-mitt/dialog-info-mitt.component';
 import { Role } from '../_models/role';
 import { ArticleService } from '../_services/article.service';
+import { FeedbackService } from '../_services/feedback.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -22,8 +23,8 @@ export class DialogDataExampleDialogComponent implements OnInit {
     public dialog: MatDialog,
     public _sanitizer: DomSanitizer,
     private articleService : ArticleService,
-    private userService : UserService
-
+    private userService : UserService,
+    private feedbackService : FeedbackService
   ) { 
     this.utente = JSON.parse(localStorage.getItem('user')!);
 
@@ -35,10 +36,11 @@ export class DialogDataExampleDialogComponent implements OnInit {
 
   }
   loading(){
+
     this.articleService.getUserbyId(this.data.id).pipe(first()).subscribe((response)=>{
+      
       this.userService.getById(response).pipe(first()).subscribe((res)=>{
         this.user = res
-        console.log(this.user)
         this.hrefemail="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to="+ res.email
         this.done = true
       })
@@ -51,7 +53,6 @@ export class DialogDataExampleDialogComponent implements OnInit {
   }
   deleteItem(id:any){
     this.articleService.delete(id).pipe(first()).subscribe((res)=>{
-      console.log(res)
     })
     this.loading()
   }

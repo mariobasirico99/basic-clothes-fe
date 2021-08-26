@@ -13,6 +13,7 @@ import { UserService } from '../_services/user.service';
 export class DialogInfoMittComponent implements OnInit {
   public feed: Feedback[] = [];
   public user : any;
+  public vote = 0.0;
   done = false
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,12 +22,19 @@ export class DialogInfoMittComponent implements OnInit {
       
   }
   ngOnInit(): void {
+    this.feedbackService.getRankingByUser(this.data).pipe(first()).subscribe((res)=>{
+      if (res != null && res!=undefined && res != "NaN"){
+        this.vote = res
+      }
+      else{
+        this.vote = 0.0
+      }
+      
+    })
     this.feedbackService.getByUser(this.data).pipe(first()).subscribe((res)=>{
       this.feed = res
-      console.log(res)
       if (this.feed.length >0){
         this.user = this.feed[0].user
-        console.log(this.user)
       }
       this.done = true
     })

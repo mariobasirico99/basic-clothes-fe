@@ -51,7 +51,6 @@ export class SettingComponent implements OnInit {
         this.userService.getById(user.userId)
           .pipe(first())
           .subscribe((userAccount) => {
-            console.log(userAccount)
             this.loading = false;
             this.userAccount = userAccount;
             this.addForm = this.formBuilder.group({
@@ -69,7 +68,6 @@ export class SettingComponent implements OnInit {
     else{
       this.loading = true;
       this.dataSource = null;
-      console.log(this.isAdmin)
       this.userService
           .getAll()
           .pipe(first())
@@ -92,7 +90,6 @@ export class SettingComponent implements OnInit {
         .pipe(first())
         .subscribe({
           next: () => {
-              console.log("Ci siamo")
               this.onLoadingUser();
           },
           error: (error) => {

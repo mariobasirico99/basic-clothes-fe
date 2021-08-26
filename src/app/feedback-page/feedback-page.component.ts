@@ -46,7 +46,6 @@ export class FeedbackPageComponent implements OnInit {
   }
   deleteItem(id:any){
     this.feedbackService.delete(id).pipe(first()).subscribe((res)=>{
-      console.log(res)
       this.onFeedbackLoading();
     })
   }
@@ -58,7 +57,6 @@ export class FeedbackPageComponent implements OnInit {
       .getAll()
       .pipe(first())
       .subscribe((response) => {
-        console.log(response)
         this.dataSource = new MatTableDataSource(response);
         this.loading = false;
       });

@@ -1,12 +1,3 @@
-<!-- nav -->
-<!-- <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
-  <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/">Home</a>
-      <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
-      <a class="nav-item nav-link" (click)="logout()">Logout</a>
-  </div>
-</nav> -->
-
 <mat-toolbar color="primary" *ngIf="user && user.token">
     <!--<span class="spacer" *ngIf="isUser">Benvenuto utente {{user.username}}</span>
     <span class="spacer" *ngIf="isAdmin">Benvenuto admin {{user.username}}</span> -->
@@ -28,7 +19,7 @@
 </mat-toolbar>
 
 
-<mat-drawer-container style="overflow-y:hidden; height: 100%; background-color: white !important;" [ngClass]="{
+<mat-drawer-container style="overflow-y:hidden; height: 100vh; background-color: white !important;" [ngClass]="{
     'h-100': !user || !user.token,
     'app-container': user && user.token
   }" [hasBackdrop]="true">

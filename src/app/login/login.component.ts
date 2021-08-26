@@ -105,8 +105,5 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         },
       });
-    this.userService.getAll().pipe(first()).subscribe((users) => {
-      console.log(users);
-    });
   }
 }

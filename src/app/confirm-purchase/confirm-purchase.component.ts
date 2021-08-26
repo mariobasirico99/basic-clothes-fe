@@ -42,7 +42,6 @@ export class ConfirmPurchaseComponent implements OnInit {
         .getById(this.iduser)
         .pipe()
         .subscribe((response) => {
-          console.log(response)
           this.user = response;
       });
   }
@@ -93,7 +92,6 @@ export class ConfirmPurchaseComponent implements OnInit {
         destinatario:[this.user.id],
         articolo: [this.idart]
     });
-      console.log("saved")
   }
   changeInfoInsert(){
     this.info= true;
@@ -107,7 +105,6 @@ export class ConfirmPurchaseComponent implements OnInit {
         destinatario:[this.user.id],
         articolo: [this.idart]
     });
-    console.log("insert")
   }
   change(s:string){
     if(s === "card"){
@@ -132,7 +129,6 @@ export class ConfirmPurchaseComponent implements OnInit {
   confirmPurchase(s:string) {
     this.loading=true;
     this.firstFormGroup.controls['pagamento'].setValue(s);
-    console.log(this.firstFormGroup.value)
     this.ordersService
         .add(this.firstFormGroup.value)
         .pipe()
@@ -156,7 +152,6 @@ export class ConfirmPurchaseComponent implements OnInit {
     }, (status: number, response: any) => {
       if (status === 200) {
         this.articleService.getById(this.idart).pipe(first()).subscribe((res)=>{
-          console.log(res)
           let token = response.id;
           this.chargeCard(token,res.prezzo);
         })
@@ -168,7 +163,6 @@ export class ConfirmPurchaseComponent implements OnInit {
   }
   chargeCard(token: string, amount : any) {
     this.paymentService.payment(token,amount.toString(10)).pipe(first()).subscribe(resp => {
-      console.log(resp);
       this.confirmPurchase("PAGATO")
     });
     

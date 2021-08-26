@@ -61,7 +61,6 @@ export class HomeComponent implements OnInit, OnChanges {
         public dialog: MatDialog
     ) {
         this.user = JSON.parse(localStorage.getItem('user')!);
-        console.log(this.user)
         this.userService.getById(this.user.userId).pipe(first()).subscribe((res)=>{
             this.utente = res
         })
@@ -79,7 +78,6 @@ export class HomeComponent implements OnInit, OnChanges {
         this.router.navigateByUrl("/addClothes");
     }
     reload(sesso:any){
-        console.log(sesso)
         if(sesso != null && sesso!=undefined && sesso !== "TUTTI"){
             if(this.user.userId !=undefined){
                 this.articleService.notMineAndSex(this.user.userId,sesso).pipe(first()).subscribe((art) => {
@@ -247,9 +245,16 @@ export class HomeComponent implements OnInit, OnChanges {
         );
       }
       deleteItem(id:any){
-        this.articleService.delete(id).pipe(first()).subscribe((res)=>{
-          console.log(res)
-        })
-        this.reload(null)
+        this.articleService.delete(id).pipe(first()).subscribe({
+            next: () => {
+                this.loading = false;
+                this.reload(null)
+            },
+            error: (error) => {
+                this.reload(null)
+                this.loading = false;
+            },
+          })
+        
       }
 }

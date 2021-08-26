@@ -42,7 +42,6 @@ export class OrderComponent implements OnInit {
   onOrdersLoading() {
     this.loading = true;
     this.dataSource = null;
-    console.log(this.isAdmin)
     if(this.isAdmin){
       this.orderService
       .getAll()
@@ -64,13 +63,11 @@ export class OrderComponent implements OnInit {
   }
   changeStatus(id :any, status:any){
     this.orderService.update(id,status).pipe(first()).subscribe((res)=>{
-      console.log(res)
       this.onOrdersLoading();
     })
   }
   changePagamento(id :any, status:any){
     this.orderService.updatePayment(id,status).pipe(first()).subscribe((res)=>{
-      console.log(res)
       this.onOrdersLoading();
     })
   }
@@ -112,8 +109,16 @@ export class OrderComponent implements OnInit {
     );
   }
   deleteItem(id:any){
-    this.orderService.delete(id).pipe(first()).subscribe((res)=>{
-      console.log(res)
+    this.loading = true
+    this.orderService.delete(id).pipe(first()).subscribe({
+      next: () => {
+          this.loading = false;
+          this.onOrdersLoading();
+      },
+      error: () => {
+        this.onOrdersLoading();
+        this.loading = false;
+      },
     })
   }
 }
