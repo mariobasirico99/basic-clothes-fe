@@ -24,7 +24,6 @@ import { FormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers/fake-backend';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -88,7 +87,6 @@ import { DialogInfoMittComponent } from './dialog-info-mitt/dialog-info-mitt.com
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    //fakeBackendProvider
   ],
   bootstrap: [AppComponent],
 })

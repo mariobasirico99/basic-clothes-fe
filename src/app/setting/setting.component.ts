@@ -1,12 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { DialogInfoMittComponent } from '../dialog-info-mitt/dialog-info-mitt.component';
+import { Path } from '../_models/path';
 import { Role } from '../_models/role';
 import { User } from '../_models/user';
 import { AuthenticationService } from '../_services/authentication.service';
+import { FeedbackService } from '../_services/feedback.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -19,6 +24,7 @@ export class SettingComponent implements OnInit {
   addForm: any;
   userAccount!: User;
   user:any;
+  public ranking = 0.0;
   displayedColumns: string[] = [
     'Id',
     'Username',
@@ -33,8 +39,20 @@ export class SettingComponent implements OnInit {
     private userService: UserService,
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    private feedbackService: FeedbackService,
+    private router: Router
   ) {
     this.user = JSON.parse(localStorage.getItem('user')!);
+    this.feedbackService.getRankingByUser(this.user.userId).pipe(first()).subscribe((res)=>{
+      if (res != null && res!=undefined && res != "NaN"){
+        this.ranking = res
+      }
+      else{
+        this.ranking = 0.0
+      }
+      
+    })
   }
 
   ngOnInit(): void {
@@ -42,6 +60,11 @@ export class SettingComponent implements OnInit {
   }
   get f() {
     return this.addForm!.controls;
+  }
+  infoMitt(){
+    this.dialog.open(DialogInfoMittComponent, {
+      data: this.user.userId,
+  })
   }
   onLoadingUser(){
     if(!this.isAdmin){

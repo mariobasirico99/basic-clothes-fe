@@ -51,29 +51,6 @@ const routes: Routes = [
     component: DialogInfoMittComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: Path.Uomo,
-    children: [
-        {path : '**' , component: HomeComponent}
-    ],
-    canActivate: [AuthGuard],
-},
-{
-    path: Path.Donna,
-    children: [
-        {path : '**' , component: HomeComponent}
-    ],
-    component: HomeComponent,
-    canActivate: [AuthGuard],
-},
-{
-    path: Path.Bambino,
-    children: [
-        {path : '**' , component: HomeComponent}
-    ],
-    component: HomeComponent,
-    canActivate: [AuthGuard],
-},
 {
     path: Path.ConfermaAcquisto + "/:id",
     component: ConfirmPurchaseComponent,

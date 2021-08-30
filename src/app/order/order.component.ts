@@ -86,7 +86,7 @@ export class OrderComponent implements OnInit {
   onOrderFeedBack(id: number,username: string){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.id = 'modal-component';
-    dialogConfig.height = '500px';
+    dialogConfig.height = '460px';
     dialogConfig.width = '400px';
     dialogConfig.data = { mittente: id, username: username};
     const dialogRef = this.matDialog.open(FeedbackModalComponent,dialogConfig);

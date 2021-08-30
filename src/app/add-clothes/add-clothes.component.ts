@@ -90,6 +90,7 @@ export class AddClothesComponent implements OnInit {
         error: (error) => {
           this.router.navigateByUrl("/");
           this.loading = false;
+          
         },
       })
     })

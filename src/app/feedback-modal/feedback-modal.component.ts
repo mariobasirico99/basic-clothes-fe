@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
-import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
 import { FeedbackService } from '../_services/feedback.service'
 

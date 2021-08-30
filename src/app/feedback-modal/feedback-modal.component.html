@@ -1,7 +1,10 @@
 <div class="container" id="modal-content-wrapper">
     <div class="row justify-content-center">
         <div class="col">
-            <h1 id="modal-title" align="center">Lascia un Feedback al Mittente</h1>
+            <h1 id="modal-title" align="center">Lascia un Feedback
+                <mat-icon>chat</mat-icon>
+            </h1>
+
         </div>
     </div>
     <div class="row justify-content-center">
@@ -33,7 +36,7 @@
                         <p>
                             <mat-form-field class="col" apparance="outline">
                                 <mat-label>Voto:</mat-label>
-                                <input matInput placeholder="max 5" type="number" formControlName="voto">
+                                <input matInput placeholder="max 5" min="0" max="5" type="number" formControlName="voto">
                             </mat-form-field>
                         </p>
                     </div>

@@ -2,7 +2,7 @@
     <div class="container-fluid w-100">
         <div class="row justify-content-center">
             <!-- Col contenente la card con il form di Login -->
-            <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-7 col-sm-9 col-12 align-self-center" style="margin-top: 30px;margin-bottom: 30px;">
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-8 col-12 align-self-center" style="margin-top: 30px;margin-bottom: 30px;">
                 <mat-card>
                     <div class="row justify-content-center">
                         <div class="col-xxl-4 col-xl-5 col-lg-4 col-md-4 col-sm-4 col-4" align="center">
@@ -100,10 +100,10 @@
                         <div class="row justify-content-center pt-1">
                             <div class="col-xxl-10 col-xl-12 col-lg-11 col-md-10 col-sm-11 col-12" align="center" style="justify-content: center; display: flex;">
                                 <div class="full_width-input" align="center">
-                                    <label for="file">File</label>
+                                    <label for="file"><h3><b>File:</b></h3></label>
                                     <input type="file" id="file" (change)="onFileChanged($event)">
                                     <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
-                                        <div *ngIf="f.file.errors.required">Image file is required.</div>
+                                        <div *ngIf="f.file.errors.required">L'immagine è obbligatoria</div>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                 <p *ngIf="error" class="error-message">{{ error }}</p>
                             </div>
                         </div>
-                        <div class="row justify-content-center pt-1 pb-3">
+                        <div class="row justify-content-center pt-1 pb-3" style="margin-top: 20px;">
                             <div class="col" align="center">
                                 <button type="submit" [disabled]="loading" mat-raised-button color="primary">
                                 <span *ngIf="!loading"> Salva </span>

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   status=true;
   error = '';
+  error2 = '';
   isPasswordHidden = true;
 
   constructor(
@@ -61,6 +62,8 @@ export class LoginComponent implements OnInit {
   }
   changeStatus(){
     this.status = !this.status;
+    this.error = ""
+    this.error2 = ""
   }
   onSubmit() {
     this.submitted = true;
@@ -101,7 +104,7 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         },
         error: (error) => {
-          this.error = error;
+          this.error2 = error;
           this.loading = false;
         },
       });
