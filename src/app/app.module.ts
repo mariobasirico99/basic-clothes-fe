@@ -43,6 +43,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { AddClothesComponent } from './add-clothes/add-clothes.component';
 import { DialogInfoMittComponent } from './dialog-info-mitt/dialog-info-mitt.component';
+import { VenditeComponent } from './vendite/vendite.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { DialogInfoMittComponent } from './dialog-info-mitt/dialog-info-mitt.com
     ConfirmPurchaseComponent,
     AddClothesComponent,
     DialogInfoMittComponent,
+    VenditeComponent,
   ],
   imports: [
     MatStepperModule,

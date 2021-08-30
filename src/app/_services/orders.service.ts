@@ -22,6 +22,9 @@ export class OrdersService {
   getByIdDest(id: number) {
     return this.http.get<Orders[]>(`${environment.apiUrl}/order/getByIdDest?id=${id}`);
   }
+  getByIdMitt(id: number) {
+    return this.http.get<Orders[]>(`${environment.apiUrl}/order/getByIdMitt?id=${id}`);
+  }
   reso(order : Orders){
     return this.http.post<Orders>(`${environment.apiUrl}/order/reso?id=${order}`,{});
   }

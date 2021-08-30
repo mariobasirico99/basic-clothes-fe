@@ -8,6 +8,7 @@
         <mat-menu #settingMenu="matMenu" yPosition="below">
             <button mat-menu-item (click)="onSettingsRedirect()" *ngIf="!isAdmin">Account</button>
             <button mat-menu-item (click)="onSettingsRedirect()" *ngIf="isAdmin">Utenti</button>
+            <button mat-menu-item (click)="onVenditeRedirect()" *ngIf="!isAdmin">Vendite</button>
             <button mat-menu-item (click)="onOrdersRedirect()">Ordini</button>
             <button mat-menu-item (click)="onFeedbackRedirect()">Feedback</button>
         </mat-menu>

@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   ) {
     this.authenticationService.user.subscribe((x) => (this.user = x));
   }
-  user!: User;
+  user!: any;
   onSettingsRedirect(): void {
     this.router.navigateByUrl(Path.Settings);
   }
@@ -37,17 +37,23 @@ export class AppComponent implements OnInit {
   onFeedbackRedirect(): void {
     this.router.navigateByUrl(Path.Feedback);
   }
+  onVenditeRedirect(): void {
+    this.router.navigateByUrl(Path.Vendite);
+  }
   onOrdersRedirect(): void {
     this.router.navigateByUrl(Path.Orders); 
   }
   get isAdmin() {
-    return this.user && this.user.role === Role.Admin;
+    return (
+      this.user &&
+      (this.user.roles[0].role === Role.Admin)
+    );
   }
   get isLogged(){
-    return this.user && (this.user.role === Role.Admin || this.user.role === Role.User);
+    return this.user && (this.user.roles[0].role === Role.Admin || this.user.roles[0].role === Role.User);
   }
   get isUser(){
-    return this.user && (this.user.role === Role.User);
+    return this.user && (this.user.roles[0].role === Role.User);
   }
   ngOnInit() {
   }

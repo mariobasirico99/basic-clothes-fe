@@ -13,6 +13,7 @@ import { FeedbackPageComponent } from './feedback-page/feedback-page.component';
 import { ConfirmPurchaseComponent } from './confirm-purchase/confirm-purchase.component';
 import { AddClothesComponent } from './add-clothes/add-clothes.component';
 import { DialogInfoMittComponent } from './dialog-info-mitt/dialog-info-mitt.component';
+import { VenditeComponent } from './vendite/vendite.component';
 
 
 const routes: Routes = [
@@ -59,6 +60,11 @@ const routes: Routes = [
   {
     path: Path.Orders,
     component: OrderComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: Path.Vendite,
+    component: VenditeComponent,
     canActivate: [AuthGuard],
   },
 

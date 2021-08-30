@@ -11,5 +11,6 @@ export enum Path {
   Donna = 'donna',
   Bambino = 'bambino',
   ConfermaAcquisto = 'confirm_purchase',
-  DialogInfoMitt = "dialoginfo"
+  DialogInfoMitt = "dialoginfo",
+  Vendite = "vendite"
 }
