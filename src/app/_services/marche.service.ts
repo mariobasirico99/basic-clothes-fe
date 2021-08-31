@@ -37,6 +37,9 @@ export class MarcheService {
             marca: 'HUGO BOSS',
           },
           {
+            marca: 'LACOSTE',
+          },
+          {
             marca: 'MOSCHINO',
           },
           {
@@ -57,6 +60,9 @@ export class MarcheService {
           {
             marca: 'VERSACE',
           },
+          {
+            marca: 'ALTRO...'
+          }
         ],
     };
   }

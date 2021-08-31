@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './_services/authentication.service';
-import { User } from './_models/user';
 import { Role } from './_models/role';
 import {
   bounceInOnEnterAnimation,
@@ -44,15 +43,24 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl(Path.Orders); 
   }
   get isAdmin() {
+    if(this.user == null || this.user == undefined){
+      this.logout()
+    }
     return (
       this.user &&
       (this.user.roles[0].role === Role.Admin)
     );
   }
   get isLogged(){
+    if(this.user == null || this.user == undefined){
+      this.logout()
+    }
     return this.user && (this.user.roles[0].role === Role.Admin || this.user.roles[0].role === Role.User);
   }
   get isUser(){
+    if(this.user == null || this.user == undefined){
+      this.logout()
+    }
     return this.user && (this.user.roles[0].role === Role.User);
   }
   ngOnInit() {
